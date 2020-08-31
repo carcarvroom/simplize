@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import TaskBoard from './taskBoard/TaskBoard'
+import TaskBoard from './boards/taskBoard/TaskBoard'
 
 class App extends Component {
   render() {
