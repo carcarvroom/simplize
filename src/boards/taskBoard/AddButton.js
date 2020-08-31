@@ -3,8 +3,11 @@ import Icon from'@material-ui/core/Icon'
 import Card from'@material-ui/core/Card'
 import Button from'@material-ui/core/Button'
 import Textarea from 'react-textarea-autosize'
+import { connect } from 'react-redux'
+import { addTaskList, addTaskCard } from '../../actions'
 
-class AddCardButton extends Component {
+
+class AddButton extends Component {
     state = {
         formOpen: false
     }
@@ -21,10 +24,34 @@ class AddCardButton extends Component {
         })
     }
 
-    handleInputChange = () => {
+    handleInputChange = (e) => {
         this.setState({
-            // text: e.target.value
+            text: e.target.value
         })
+    }
+
+    handleAddList = () => {
+        const {dispatch} = this.props
+        const {text} = this.state
+
+        if(text) {
+            this.setState({text: ''})
+            dispatch(addTaskList(text))
+        }
+
+        return
+    }
+
+    handleAddCard = () => {
+        const {dispatch, listId} = this.props
+        const {text} = this.state
+
+        if(text) {
+            this.setState({text: ''})
+            dispatch(addTaskCard(listId, text))
+        }
+
+        return
     }
 
     renderAddButton = () => {
@@ -76,7 +103,9 @@ class AddCardButton extends Component {
                 />
             </Card>
             <div style={styles.formButtonGroup}>
-                <Button variant='contained' style={{color: 'white', backgroundColor: "#008000"}}>
+                <Button 
+                onMouseDown={list ? this.handleAddList : this.handleAddCard}
+                variant='contained' style={{color: 'white', backgroundColor: "#008000"}}>
                     {buttonTitle}
                 </Button>
                 <Icon style={{marginLeft: 8, cursor: 'pointer'}}>close</Icon>
@@ -106,4 +135,4 @@ const styles = {
     }
 }
 
-export default AddCardButton
+export default connect()(AddButton)
