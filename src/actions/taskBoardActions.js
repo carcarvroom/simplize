@@ -6,3 +6,24 @@ export const addTaskList = (title) => {
      payload: title
  }
 }
+
+export const sort = (
+    droppableIdStart,
+    droppableIdEnd,
+    droppableIndexStart,
+    droppableIndexEnd,
+    draggableId,
+    type
+    ) => {
+    return {
+        type: CONSTANTS.DRAGGED,
+        payload: {
+            droppableIdStart,
+            droppableIdEnd,
+            droppableIndexStart,
+            droppableIndexEnd,
+            draggableId,
+            type
+        }
+    }
+}

@@ -59,7 +59,7 @@ const taskListReducer = (state = initialState, action) => {
             listId += 1
             return [...state, newList]
 
-        case CONSTANTS.ADD_CARD:
+        case CONSTANTS.ADD_CARD: {
             const newCard = {
                 text: action.payload.text,
                 id: `card-${cardId}`
@@ -75,6 +75,35 @@ const taskListReducer = (state = initialState, action) => {
                     return list
                 }
             })
+            return newState
+        }
+        case CONSTANTS.DRAGGED: 
+            const {droppableIdStart,
+                droppableIdEnd,
+                droppableIndexStart,
+                droppableIndexEnd,
+                draggableId,
+                type
+            } = action.payload
+            const newState = [...state]
+            if(type === 'list') {
+                const list = newState.splice(droppableIndexStart, 1)
+                newState.splice(droppableIndexEnd, 0, ...list)
+                return newState
+            }
+            
+            if(droppableIdStart === droppableIdEnd) {
+                const list = state.find(list => droppableIdStart === list.id)
+                const card = list.cards.splice(droppableIndexStart, 1)
+                list.cards.splice(droppableIndexEnd, 0, ...card)
+            }
+
+            if(droppableIdStart !== droppableIdEnd) {
+                const listStart = state.find(list => droppableIdStart === list.id)
+                const card = listStart.cards.splice(droppableIndexStart, 1)
+                const listEnd = state.find(list => droppableIdEnd === list.id)
+                listEnd.cards.splice(droppableIndexEnd, 0, ...card)
+            }
             return newState
 
         default: 
