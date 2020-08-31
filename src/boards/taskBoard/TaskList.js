@@ -1,6 +1,5 @@
 import React from 'react'
 import TaskCard from './TaskCard'
-import { red } from '@material-ui/core/colors'
 import AddCardButton from './AddButton'
 
 const TaskList = ({title, cards}) => {
