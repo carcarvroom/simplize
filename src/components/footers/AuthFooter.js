@@ -1,10 +1,7 @@
 import React from "react";
-
-// reactstrap components
 import { NavItem, NavLink, Nav, Container, Row, Col } from "reactstrap";
 
-class Login extends React.Component {
-  render() {
+const Login = () => {
     return (
       <>
         <footer className="py-5">
@@ -12,18 +9,26 @@ class Login extends React.Component {
             <Row className="align-items-center justify-content-xl-between">
               <Col xl="6">
                 <div className="copyright text-center text-xl-left text-muted">
-                  © 2018{" "}
+                  Developed by{" "}
                   <a
                     className="font-weight-bold ml-1"
                     href="https://www.linkedin.com/in/carlyla/"
                     target="_blank"
                   >
-                    Creative Tim
+                    Carly La
                   </a>
                 </div>
               </Col>
               <Col xl="6">
                 <Nav className="nav-footer justify-content-center justify-content-xl-end">
+                  {/* <NavItem>
+                    <NavLink
+                      href="#"
+                      target="_blank"
+                    >
+                      Website
+                    </NavLink>
+                  </NavItem> */}
                   <NavItem>
                     <NavLink
                       href="https://medium.com/@carly_l"
@@ -34,7 +39,7 @@ class Login extends React.Component {
                   </NavItem>
                   <NavItem>
                     <NavLink
-                      href="https://github.com/carcarvroom/project-frontend"
+                      href="https://github.com/carcarvroom"
                       target="_blank"
                     >
                       Github
@@ -46,8 +51,7 @@ class Login extends React.Component {
           </Container>
         </footer>
       </>
-    );
-  }
+    )
 }
 
 export default Login;

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// reactstrap components
+
 import {
   DropdownMenu,
   DropdownItem,
@@ -54,7 +54,7 @@ class AdminNavbar extends React.Component {
                     </span>
                     <Media className="ml-2 d-none d-lg-block">
                       <span className="mb-0 text-sm font-weight-bold">
-                        Jessica Jones
+                        Carly La
                       </span>
                     </Media>
                   </Media>
