@@ -59,7 +59,7 @@ class Login extends React.Component {
             </CardHeader>
             <CardBody className="px-lg-5 py-lg-5">
               <div className="text-center text-muted mb-4">
-                <small>Or sign in with credentials</small>
+                <small>Or sign in with email</small>
               </div>
               <Form role="form">
                 <FormGroup className="mb-3">
@@ -79,7 +79,7 @@ class Login extends React.Component {
                         <i className="ni ni-lock-circle-open" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input placeholder="Password" type="password" autoComplete="new-password"/>
+                    <Input placeholder="Password" type="password"/>
                   </InputGroup>
                 </FormGroup>
                 <div className="custom-control custom-control-alternative custom-checkbox">

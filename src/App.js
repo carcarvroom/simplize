@@ -1,33 +1,20 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom"
 
+import HomePage from './components/layouts/HomePage'
 import AdminLayout from './components/layouts/Admin'
 import AuthLayout from './components/layouts/Auth'
-
-import Sidebar from './components/navbars/Sidebar'
-import TaskBoard from './boards/taskBoard/TaskBoard'
-import routes from "./routes.js"
-
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
-      {/* <div>
-        <Sidebar routes={routes}
-        logo={{
-            innerLink: "/admin/index",
-            imgSrc: require("./assets/simplize-logo.png"),
-            imgAlt: "..."
-          }} />
-        <h1>This is app</h1>
-        <TaskBoard />
-      </div> */}
         <Switch>
-          <Route path="/admin" render={props => <AdminLayout {...props} />} />
-          <Route path="/auth" render={props => <AuthLayout {...props} />} />
+          <Route exact path="/" component={HomePage} />
+          <Route path="/admin" component={AdminLayout} />
+          <Route path="/auth" component={AuthLayout} />
           {/* redirect to /simplize */}
-          <Redirect from="/" to="/auth" />
+          {/* <Redirect from="/" to="/auth" /> */}
         </Switch>
       </BrowserRouter>
     )

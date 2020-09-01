@@ -1,6 +1,5 @@
 import React from "react";
 
-// reactstrap components
 import {
   Button,
   Card,
@@ -59,7 +58,7 @@ class Register extends React.Component {
             </CardHeader>
             <CardBody className="px-lg-5 py-lg-5">
               <div className="text-center text-muted mb-4">
-                <small>Or sign up with credentials</small>
+                <small>Or sign up with email</small>
               </div>
               <Form role="form">
                 <FormGroup>
