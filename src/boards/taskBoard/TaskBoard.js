@@ -52,7 +52,7 @@ const styles = {
     }
 }
 const mapStateToProps = state => ({
-    lists: state.taskList
+    lists: state.taskListReducer
 })
 
 export default connect(mapStateToProps)(TaskBoard)
