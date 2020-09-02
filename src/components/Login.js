@@ -1,6 +1,7 @@
 import React from "react";
-
-// reactstrap components
+import { connect } from 'react-redux'
+import { loginUser } from '../actions'
+import { Link } from "react-router-dom";
 import {
   Button,
   Card,
@@ -13,10 +14,29 @@ import {
   InputGroupText,
   InputGroup,
   Row,
-  Col
+  Col,
+  NavLink
 } from "reactstrap";
 
 class Login extends React.Component {
+
+  state = {
+    username: '',
+    password: ''
+  }
+
+  handleOnChange = e => {
+    e.persist()
+    this.setState(() => ({
+      [e.target.name]: e.target.value
+    }))
+  }  
+
+  handleLogin = e => {
+    e.preventDefault()
+    this.props.loginUser(this.state)
+  }
+
   render() {
     return (
       <>
@@ -59,9 +79,9 @@ class Login extends React.Component {
             </CardHeader>
             <CardBody className="px-lg-5 py-lg-5">
               <div className="text-center text-muted mb-4">
-                <small>Or sign in with email</small>
+                <small>Or sign in below</small>
               </div>
-              <Form role="form">
+              <Form role="form" onSubmit={(e)=> this.handleLogin(e)}>
                 <FormGroup className="mb-3">
                   <InputGroup className="input-group-alternative">
                     <InputGroupAddon addonType="prepend">
@@ -69,7 +89,7 @@ class Login extends React.Component {
                         <i className="ni ni-email-83" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input placeholder="Email" type="email" autoComplete="new-email"/>
+                    <Input placeholder="Username" type="username" name='username' onChange={this.handleOnChange}/>
                   </InputGroup>
                 </FormGroup>
                 <FormGroup>
@@ -79,24 +99,11 @@ class Login extends React.Component {
                         <i className="ni ni-lock-circle-open" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input placeholder="Password" type="password"/>
+                    <Input placeholder="Password" type="password" name='password' onChange={this.handleOnChange}/>
                   </InputGroup>
                 </FormGroup>
-                <div className="custom-control custom-control-alternative custom-checkbox">
-                  <input
-                    className="custom-control-input"
-                    id=" customCheckLogin"
-                    type="checkbox"
-                  />
-                  <label
-                    className="custom-control-label"
-                    htmlFor=" customCheckLogin"
-                  >
-                    <span className="text-muted">Remember me</span>
-                  </label>
-                </div>
                 <div className="text-center">
-                  <Button className="my-4" color="primary" type="button">
+                  <Button className="my-4" color="primary" type="submit">
                     Sign in
                   </Button>
                 </div>
@@ -114,13 +121,13 @@ class Login extends React.Component {
               </a>
             </Col>
             <Col className="text-right" xs="6">
-              <a
+            <NavLink
                 className="text-light"
-                href="#pablo"
-                onClick={e => e.preventDefault()}
+                to="/auth/register"
+                tag={Link}
               >
                 <small>Create new account</small>
-              </a>
+              </NavLink>
             </Col>
           </Row>
         </Col>
@@ -129,4 +136,10 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+const mapDispatchToProps = dispatch => {
+  return {
+    loginUser: user => dispatch(loginUser(user))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Login)

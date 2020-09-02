@@ -1,5 +1,6 @@
 import React from "react";
-
+import { connect } from 'react-redux'
+import { signUpUser } from '../actions'
 import {
   Button,
   Card,
@@ -11,11 +12,30 @@ import {
   InputGroupAddon,
   InputGroupText,
   InputGroup,
-  Row,
   Col
 } from "reactstrap";
 
 class Register extends React.Component {
+
+  state = {
+    name: '',
+    email: '',
+    username: '',
+    password: ''
+  }
+
+  handleOnChange = e => {
+    e.persist()
+    this.setState(() => ({
+      [e.target.name]: e.target.value
+    }))
+  }  
+
+  handleRegister= e => {
+    e.preventDefault()
+    this.props.signUpUser(this.state)
+  }
+
   render() {
     return (
       <>
@@ -60,7 +80,7 @@ class Register extends React.Component {
               <div className="text-center text-muted mb-4">
                 <small>Or sign up with email</small>
               </div>
-              <Form role="form">
+              <Form role="form" onSubmit={(e) => this.handleRegister(e)}>
                 <FormGroup>
                   <InputGroup className="input-group-alternative mb-3">
                     <InputGroupAddon addonType="prepend">
@@ -68,7 +88,7 @@ class Register extends React.Component {
                         <i className="ni ni-hat-3" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input placeholder="Name" type="text" />
+                    <Input placeholder="Name" type="text" name="name" onChange={this.handleOnChange} />
                   </InputGroup>
                 </FormGroup>
                 <FormGroup>
@@ -78,7 +98,7 @@ class Register extends React.Component {
                         <i className="ni ni-email-83" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input placeholder="Email" type="email" autoComplete="new-email"/>
+                    <Input placeholder="Email" type="email" name="email" onChange={this.handleOnChange}/>
                   </InputGroup>
                 </FormGroup>
                 <FormGroup>
@@ -88,7 +108,7 @@ class Register extends React.Component {
                         <i className="ni ni-email-83" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input placeholder="Username" type="username"/>
+                    <Input placeholder="Username" type="username" name="username" onChange={this.handleOnChange}/>
                   </InputGroup>
                 </FormGroup>
                 <FormGroup>
@@ -98,7 +118,7 @@ class Register extends React.Component {
                         <i className="ni ni-lock-circle-open" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input placeholder="Password" type="password"/>
+                    <Input placeholder="Password" type="password" name="password" onChange={this.handleOnChange}/>
                   </InputGroup>
                 </FormGroup>
                 <div className="text-muted font-italic">
@@ -108,7 +128,7 @@ class Register extends React.Component {
                   </small>
                 </div>
                 <div className="text-center">
-                  <Button className="mt-4" color="primary" type="button">
+                  <Button className="mt-4" color="primary" type="submit">
                     Create account
                   </Button>
                 </div>
@@ -121,4 +141,4 @@ class Register extends React.Component {
   }
 }
 
-export default Register;
+export default connect(null, {signUpUser})(Register)

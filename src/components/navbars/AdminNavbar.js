@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from 'react-redux'
+import { logOutUser } from '../../actions'
 import { Link } from "react-router-dom";
 
 import {
@@ -19,6 +21,12 @@ import {
 } from "reactstrap";
 
 class AdminNavbar extends React.Component {
+
+  handleLogout = () => {
+    console.log('just logged out!')
+    this.props.logOutUser()
+  }
+
   render() {
     return (
       <>
@@ -80,7 +88,7 @@ class AdminNavbar extends React.Component {
                     <span>Support</span>
                   </DropdownItem>
                   <DropdownItem divider />
-                  <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
+                  <DropdownItem onClick={ this.handleLogout}>
                     <i className="ni ni-user-run" />
                     <span>Logout</span>
                   </DropdownItem>
@@ -94,4 +102,4 @@ class AdminNavbar extends React.Component {
   }
 }
 
-export default AdminNavbar;
+export default connect(null, {logOutUser})(AdminNavbar)

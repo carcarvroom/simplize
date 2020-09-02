@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux'
-import taskList from './taskListReducer'
+import userReducer from './userReducer'
+import taskListReducer from './taskListReducer'
 
 export default combineReducers({
-    taskList
+    userReducer,
+    taskListReducer
 })

@@ -15,13 +15,13 @@ class Admin extends React.Component {
     this.refs.mainContent.scrollTop = 0;
   }
   getRoutes = routes => {
-    return routes.map((prop, key) => {
-      if (prop.layout === "/admin") {
+    return routes.map((component, index) => {
+      if (component.layout === "/admin") {
         return (
           <Route
-            path={prop.layout + prop.path}
-            component={prop.component}
-            key={key}
+            path={component.layout + component.path}
+            component={component.component}
+            key={index}
           />
         );
       } else {
