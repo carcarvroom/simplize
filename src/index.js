@@ -7,6 +7,7 @@ import store from './store'
 
 import "./assets/css/argon-dashboard-react.min.css";
 import "./assets/css/argon-dashboard-react.css.map";
+import "./assets/plugins/nucleo/css/nucleo.css";
 
 ReactDOM.render(
   // <React.StrictMode>

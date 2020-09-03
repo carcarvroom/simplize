@@ -1,6 +1,6 @@
 import React from "react";
+import UserHeader from "./headers/UserHeader"
 
-// reactstrap components
 import {
   Button,
   Card,
@@ -12,9 +12,7 @@ import {
   Container,
   Row,
   Col
-} from "reactstrap";
-// core components
-import UserHeader from "./headers/UserHeader.js";
+} from "reactstrap"
 
 class Profile extends React.Component {
   render() {
@@ -33,7 +31,7 @@ class Profile extends React.Component {
                         <img
                           alt="..."
                           className="rounded-circle"
-                          src={require("../assets/img/theme/team-4-800x800.jpg")}
+                          src={require("../assets/img/theme/carly_img.png")}
                         />
                       </a>
                     </div>
@@ -82,26 +80,24 @@ class Profile extends React.Component {
                   </Row>
                   <div className="text-center">
                     <h3>
-                      Jessica Jones
+                      Carly
                       <span className="font-weight-light">, 27</span>
                     </h3>
                     <div className="h5 font-weight-300">
                       <i className="ni location_pin mr-2" />
-                      Bucharest, Romania
+                      Seattle, Washington
                     </div>
                     <div className="h5 mt-4">
                       <i className="ni business_briefcase-24 mr-2" />
-                      Solution Manager - Creative Tim Officer
+                      Software Engineering Student
                     </div>
                     <div>
                       <i className="ni education_hat mr-2" />
-                      University of Computer Science
+                      University of Washington
                     </div>
                     <hr className="my-4" />
                     <p>
-                      Ryan — the name taken by Melbourne-raised, Brooklyn-based
-                      Nick Murphy — writes, performs and records all of his own
-                      music.
+                      I like to go hiking, camping, hanging out at home. I foster kittens too!
                     </p>
                     <a href="#pablo" onClick={e => e.preventDefault()}>
                       Show more
@@ -146,7 +142,7 @@ class Profile extends React.Component {
                             </label>
                             <Input
                               className="form-control-alternative"
-                              defaultValue="lucky.jesse"
+                              defaultValue="carly"
                               id="input-username"
                               placeholder="Username"
                               type="text"
@@ -164,7 +160,7 @@ class Profile extends React.Component {
                             <Input
                               className="form-control-alternative"
                               id="input-email"
-                              placeholder="jesse@example.com"
+                              placeholder="carly@email.com"
                               type="email"
                             />
                           </FormGroup>
@@ -181,7 +177,6 @@ class Profile extends React.Component {
                             </label>
                             <Input
                               className="form-control-alternative"
-                              defaultValue="Lucky"
                               id="input-first-name"
                               placeholder="First name"
                               type="text"
@@ -198,7 +193,6 @@ class Profile extends React.Component {
                             </label>
                             <Input
                               className="form-control-alternative"
-                              defaultValue="Jesse"
                               id="input-last-name"
                               placeholder="Last name"
                               type="text"
@@ -224,7 +218,6 @@ class Profile extends React.Component {
                             </label>
                             <Input
                               className="form-control-alternative"
-                              defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
                               id="input-address"
                               placeholder="Home Address"
                               type="text"
@@ -243,7 +236,6 @@ class Profile extends React.Component {
                             </label>
                             <Input
                               className="form-control-alternative"
-                              defaultValue="New York"
                               id="input-city"
                               placeholder="City"
                               type="text"
@@ -260,7 +252,6 @@ class Profile extends React.Component {
                             </label>
                             <Input
                               className="form-control-alternative"
-                              defaultValue="United States"
                               id="input-country"
                               placeholder="Country"
                               type="text"
@@ -295,8 +286,6 @@ class Profile extends React.Component {
                           className="form-control-alternative"
                           placeholder="A few words about you ..."
                           rows="4"
-                          defaultValue="A beautiful Dashboard for Bootstrap 4. It is Free and
-                          Open Source."
                           type="textarea"
                         />
                       </FormGroup>

@@ -11,9 +11,11 @@ class Auth extends React.Component {
   componentDidMount() {
     document.body.classList.add("bg-default");
   }
+
   componentWillUnmount() {
     document.body.classList.remove("bg-default");
   }
+
   getRoutes = routes => {
     return routes.map((component, index) => {
       if (component.layout === "/auth") {
@@ -27,8 +29,9 @@ class Auth extends React.Component {
       } else {
         return null;
       }
-    });
-  };
+    })
+  }
+  
   render() {
     return (
       <>

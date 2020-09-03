@@ -7,28 +7,32 @@ import AdminFooter from "../footers/AdminFooter"
 import Sidebar from "../navbars/Sidebar"
 
 import routes from "../../routes"
+import Profile from "../Profile"
+
 
 class Admin extends React.Component {
   componentDidUpdate(e) {
-    document.documentElement.scrollTop = 0;
-    document.scrollingElement.scrollTop = 0;
-    this.refs.mainContent.scrollTop = 0;
+    document.documentElement.scrollTop = 0
+    document.scrollingElement.scrollTop = 0
+    this.refs.mainContent.scrollTop = 0
   }
+
   getRoutes = routes => {
     return routes.map((component, index) => {
-      if (component.layout === "/admin") {
+      if(component.layout === "/admin") {
         return (
           <Route
             path={component.layout + component.path}
             component={component.component}
             key={index}
           />
-        );
+        )
       } else {
         return null;
       }
-    });
-  };
+    })
+  }
+
   getBrandText = path => {
     for (let i = 0; i < routes.length; i++) {
       if (
@@ -48,8 +52,8 @@ class Admin extends React.Component {
           {...this.props}
           routes={routes}
           logo={{
-            innerLink: "/admin/index",
-            imgSrc: require("../../assets/simplize-logo.png"),
+            innerLink: "/admin/dashboard",
+            imgSrc: require("../../assets/img/brand/simplize-logo.png"),
             imgAlt: "..."
           }}
         />
@@ -60,7 +64,8 @@ class Admin extends React.Component {
           />
           <Switch>
             {this.getRoutes(routes)}
-            <Redirect from="*" to="/admin/index" />
+            <Route to="/admin/profile" component={Profile} />
+            <Redirect from="*" to="/admin/dashboard" />
           </Switch>
           <Container fluid>
             <AdminFooter />

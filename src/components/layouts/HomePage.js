@@ -1,11 +1,9 @@
 import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom"
+import { Route } from "react-router-dom"
 import { Container, Row, Col } from "reactstrap"
 
 import AuthNavbar from "../navbars/AuthNavbar"
 import AuthFooter from "../footers/AuthFooter"
-
-import routes from "../../routes"
 
 class Home extends React.Component {
   componentDidMount() {
@@ -64,14 +62,6 @@ class Home extends React.Component {
             </div>
           </div>
           {/* Page content */}
-          {/* <Container className="mt--8 pb-5"> */}
-            {/* <Row className="justify-content-center">
-              <Switch>
-                {this.getRoutes(routes)}
-                <Redirect from="*" to="/auth/login" />
-              </Switch>
-            </Row>
-          </Container> */}
         </div>
         <AuthFooter />
       </>

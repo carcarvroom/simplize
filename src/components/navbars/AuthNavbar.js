@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// reactstrap components
+
 import {
   UncontrolledCollapse,
   NavbarBrand,
@@ -20,7 +20,7 @@ class AdminNavbar extends React.Component {
         <Navbar className="navbar-top navbar-horizontal navbar-dark" expand="md">
           <Container className="px-4">
             <NavbarBrand to="/" tag={Link}>
-              <img alt="..." src={require("../../assets/simplize-logo.png")} />
+              <img alt="..." src={require("../../assets/img/brand/simplize-logo.png")} />
             </NavbarBrand>
             <button className="navbar-toggler" id="navbar-collapse-main">
               <span className="navbar-toggler-icon" />
@@ -32,7 +32,7 @@ class AdminNavbar extends React.Component {
                     <Link to="/">
                       <img
                         alt="..."
-                        src={require("../../assets/simplize-logo.png")}
+                        src={require("../../assets/img/brand/simplize-logo.png")}
                       />
                     </Link>
                   </Col>
