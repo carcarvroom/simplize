@@ -28,6 +28,7 @@ class AdminNavbar extends React.Component {
   }
 
   render() {
+    const {user} = this.props
     return (
       <>
         <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
@@ -57,12 +58,12 @@ class AdminNavbar extends React.Component {
                     <span className="avatar avatar-sm rounded-circle">
                       <img
                         alt="..."
-                        src={require("../../assets/img/theme/carly_img.png")}
+                        src={user.profile_img}
                       />
                     </span>
                     <Media className="ml-2 d-none d-lg-block">
                       <span className="mb-0 text-sm font-weight-bold">
-                        Carly La
+                        {user.first_name} {user.last_name}
                       </span>
                     </Media>
                   </Media>
@@ -81,7 +82,7 @@ class AdminNavbar extends React.Component {
                   </DropdownItem>
                   <DropdownItem to="/admin/profile" tag={Link}>
                     <i className="ni ni-calendar-grid-58" />
-                    <span>Activity</span>
+                    <span>Switch Teams</span>
                   </DropdownItem>
                   <DropdownItem divider />
                   <DropdownItem onClick={this.handleLogout}>
@@ -98,4 +99,8 @@ class AdminNavbar extends React.Component {
   }
 }
 
-export default connect(null, {logOutUser})(AdminNavbar)
+const mapStateToProps = state => ({
+  user: state.userReducer.user
+})
+
+export default connect(mapStateToProps, {logOutUser})(AdminNavbar)

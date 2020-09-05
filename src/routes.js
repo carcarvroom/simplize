@@ -1,4 +1,4 @@
-import Profile from "./components/Profile"
+import Dashboard from "./components/Dashboard"
 import Register from "./components/Register"
 import Login from "./components/Login"
 import Issue from "./boards/issueBoard/IssueBoard"
@@ -11,7 +11,7 @@ const routes = [
     path: "/dashboard",
     name: "Dashboard",
     icon: "ni ni-tv-2 text-green",
-    // component: dashboard,
+    component: Dashboard,
     layout: "/admin"
   },
   {

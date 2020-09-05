@@ -1,10 +1,11 @@
 import React from "react";
+import { connect } from 'react-redux'
 
-// reactstrap components
-import { Button, Container, Row, Col } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 
 class UserHeader extends React.Component {
   render() {
+    const {user} = this.props
     return (
       <>
         <div
@@ -23,18 +24,17 @@ class UserHeader extends React.Component {
           <Container className="d-flex align-items-center" fluid>
             <Row>
               <Col lg="7" md="10">
-                <h1 className="display-2 text-white">Hello Carly</h1>
+                <h1 className="display-2 text-white">Hello {user.first_name}</h1>
                 <p className="text-white mt-0 mb-5">
-                  {/* {insert description} */}
-                  I'm currently making a large career change into becoming a Software Engineer!
+                  {user.description}
                 </p>
-                <Button
+                {/* <Button
                   color="info"
                   href="#pablo"
                   onClick={e => e.preventDefault()}
                 >
                   Edit profile
-                </Button>
+                </Button> */}
               </Col>
             </Row>
           </Container>
@@ -44,4 +44,9 @@ class UserHeader extends React.Component {
   }
 }
 
-export default UserHeader;
+
+const mapStateToProps = state => ({
+  user: state.userReducer.user
+})
+
+export default connect(mapStateToProps)(UserHeader)

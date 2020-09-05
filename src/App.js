@@ -17,7 +17,7 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-      { this.props.userReducer.loggedIn ?
+      { localStorage.token ?
         <Switch>
           <Route path="/admin" component={AdminLayout} />
           <Redirect from="*" to="/admin" />

@@ -4,6 +4,7 @@ import TaskList from './TaskList'
 import AddListButton from './AddButton'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { sort } from '../../actions'
+import Header from "../../components/headers/Header"
 
 class TaskBoard extends Component {
     onDragEnd = (result) => {
@@ -26,6 +27,8 @@ class TaskBoard extends Component {
     render() {
         const { lists } = this.props
         return (
+          <>
+            <Header />
             <DragDropContext onDragEnd={this.onDragEnd}>
             <div style={styles.listsContainer}>
                 <Droppable droppableId='all-lists' direction='horizontal' type='list'>
@@ -40,6 +43,7 @@ class TaskBoard extends Component {
                 </Droppable>
             </div>
             </DragDropContext>
+          </>
         )
     }
 }

@@ -31,20 +31,6 @@ const initialState = [
                 text: "test 2"
             }
         ]
-    },
-    {
-        title: 'Done',
-        id: `list-${2}`,
-        cards: [
-            {
-                id: `card-${5}`,
-                text: "test 1"
-            },
-            {
-                id: `card-${6}`,
-                text: "test 2"
-            }
-        ]
     }
 ]
 
@@ -112,3 +98,4 @@ const taskListReducer = (state = initialState, action) => {
 }
 
 export default taskListReducer
+

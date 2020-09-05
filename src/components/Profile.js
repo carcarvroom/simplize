@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from 'react-redux'
+import { updateUser, deleteUser } from '../actions'
 import UserHeader from "./headers/UserHeader"
 
 import {
@@ -11,11 +13,57 @@ import {
   Input,
   Container,
   Row,
-  Col
+  Col,
+  Modal
 } from "reactstrap"
 
 class Profile extends React.Component {
+
+  state = {
+    profileModalOpen: false,
+    updateInfo: {}
+  }
+
+  toggleModal = (state, user=null) => {
+    if(this.state.profileModalOpen) {
+      this.setState({
+        [state]: !this.state[state],
+        updateInfo: {}
+      })
+    } else {
+      this.setState({
+        [state]: !this.state[state],
+        updateInfo: {
+          first_name: user.first_name,
+          last_name: user.last_name,
+          email: user.email,
+          address: '',
+          description: user.description
+        }
+      })
+    }
+  }
+
+  handleOnChange = e => {
+    e.persist()
+    this.setState(() => ({
+
+      updateInfo: {
+        ...this.state.updateInfo,
+        [e.target.name]: e.target.value
+      }
+    }))
+  }  
+
+  handleEditProfile = e => {
+    e.preventDefault()
+    this.props.updateUser(this.props.user.id, this.state.updateInfo)
+    this.toggleModal("profileModalOpen")
+
+  }
+
   render() {
+    const {user} = this.props
     return (
       <>
         <UserHeader />
@@ -31,7 +79,7 @@ class Profile extends React.Component {
                         <img
                           alt="..."
                           className="rounded-circle"
-                          src={require("../assets/img/theme/carly_img.png")}
+                          src={user.profile_img}
                         />
                       </a>
                     </div>
@@ -63,41 +111,41 @@ class Profile extends React.Component {
                   <Row>
                     <div className="col">
                       <div className="card-profile-stats d-flex justify-content-center mt-md-5">
-                        <div>
+                        {/* <div>
                           <span className="heading">22</span>
-                          <span className="description">Friends</span>
+                          <span className="description">Teams</span>
                         </div>
                         <div>
                           <span className="heading">10</span>
-                          <span className="description">Photos</span>
+                          <span className="description">Tasks</span>
                         </div>
                         <div>
                           <span className="heading">89</span>
                           <span className="description">Comments</span>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </Row>
                   <div className="text-center">
                     <h3>
-                      Carly
-                      <span className="font-weight-light">, 27</span>
+                      {user.first_name}
+                      <span className="font-weight-light">{', '}{user.age}</span>
                     </h3>
                     <div className="h5 font-weight-300">
                       <i className="ni location_pin mr-2" />
-                      Seattle, Washington
+                      {user.location}
                     </div>
                     <div className="h5 mt-4">
                       <i className="ni business_briefcase-24 mr-2" />
-                      Software Engineering Student
+                      {user.position}
                     </div>
                     <div>
                       <i className="ni education_hat mr-2" />
-                      University of Washington
+                      {user.organization}
                     </div>
                     <hr className="my-4" />
                     <p>
-                      I like to go hiking, camping, hanging out at home. I foster kittens too!
+                      {user.description}
                     </p>
                     <a href="#pablo" onClick={e => e.preventDefault()}>
                       Show more
@@ -116,11 +164,10 @@ class Profile extends React.Component {
                     <Col className="text-right" xs="4">
                       <Button
                         color="primary"
-                        href="#pablo"
-                        onClick={e => e.preventDefault()}
+                        onClick={() => this.toggleModal("profileModalOpen", user)}
                         size="sm"
                       >
-                        Settings
+                        Edit Profile
                       </Button>
                     </Col>
                   </Row>
@@ -142,9 +189,9 @@ class Profile extends React.Component {
                             </label>
                             <Input
                               className="form-control-alternative"
-                              defaultValue="carly"
+                              defaultValue={user.username}
                               id="input-username"
-                              placeholder="Username"
+                              placeholder={user.username}
                               type="text"
                             />
                           </FormGroup>
@@ -160,7 +207,7 @@ class Profile extends React.Component {
                             <Input
                               className="form-control-alternative"
                               id="input-email"
-                              placeholder="carly@email.com"
+                              placeholder={user.email}
                               type="email"
                             />
                           </FormGroup>
@@ -178,7 +225,7 @@ class Profile extends React.Component {
                             <Input
                               className="form-control-alternative"
                               id="input-first-name"
-                              placeholder="First name"
+                              placeholder={user.first_name}
                               type="text"
                             />
                           </FormGroup>
@@ -194,7 +241,7 @@ class Profile extends React.Component {
                             <Input
                               className="form-control-alternative"
                               id="input-last-name"
-                              placeholder="Last name"
+                              placeholder={user.last_name}
                               type="text"
                             />
                           </FormGroup>
@@ -284,7 +331,7 @@ class Profile extends React.Component {
                         <label>About Me</label>
                         <Input
                           className="form-control-alternative"
-                          placeholder="A few words about you ..."
+                          placeholder={user.description}
                           rows="4"
                           type="textarea"
                         />
@@ -295,10 +342,220 @@ class Profile extends React.Component {
               </Card>
             </Col>
           </Row>
-        </Container>
+          <Button
+            color="info"
+            onClick={() => {if (window.confirm('Are you sure you want to delete this account?')) this.props.deleteUser(user.id)}}
+          >
+            Delete Account
+          </Button>
+          </Container>
+          <Modal
+          className="modal-dialog-centered"
+          isOpen={this.state.profileModalOpen}
+          toggle={() => this.toggleModal("profileModalOpen")}
+          >
+            <CardHeader className="bg-white border-0">
+              <Row className="align-items-center">
+                <Col xs="8">
+                  <h3 className="mb-0">Edit Profile</h3>
+                </Col>
+                <Col className="text-right" xs="4">
+                  <Button
+                    color="primary"
+                    onClick={() => this.toggleModal("profileModalOpen")}
+                    size="sm"
+                  >
+                    X
+                  </Button>
+                </Col>
+              </Row>
+            </CardHeader>
+            <CardBody>
+              <Form onSubmit={(e) => {this.handleEditProfile(e)}}>
+                <h6 className="heading-small text-muted mb-4">
+                  User information
+                </h6>
+                <div className="pl-lg-4">
+                  <Row>
+                    <Col lg="6">
+                      <FormGroup>
+                        <label
+                          className="form-control-label"
+                          htmlFor="input-first-name"
+                        >
+                          First name
+                        </label>
+                        <Input
+                          className="form-control-alternative"
+                          id="input-first-name"
+                          placeholder={user.first_name}
+                          defaultValue={user.first_name}
+                          type="text"
+                          name="first_name"
+                          onChange={this.handleOnChange}
+                        />
+                      </FormGroup>
+                    </Col>
+                    <Col lg="6">
+                      <FormGroup>
+                        <label
+                          className="form-control-label"
+                          htmlFor="input-last-name"
+                        >
+                          Last name
+                        </label>
+                        <Input
+                          className="form-control-alternative"
+                          id="input-last-name"
+                          placeholder={user.last_name}
+                          defaultValue={user.last_name}
+                          type="text"
+                          name="last_name"
+                          onChange={this.handleOnChange}
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col lg="6">
+                      <FormGroup>
+                        <label
+                          className="form-control-label"
+                          htmlFor="input-email"
+                        >
+                          Email address
+                        </label>
+                        <Input
+                          className="form-control-alternative"
+                          id="input-email"
+                          placeholder={user.email}
+                          defaultValue={user.email}
+                          type="email"
+                          name="email"
+                          onChange={this.handleOnChange}
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                </div>
+                <hr className="my-4" />
+                <h6 className="heading-small text-muted mb-4">
+                  Contact information
+                </h6>
+                <div className="pl-lg-4">
+                  <Row>
+                    <Col md="12">
+                      <FormGroup>
+                        <label
+                          className="form-control-label"
+                          htmlFor="input-address"
+                        >
+                          Address
+                        </label>
+                        <Input
+                          className="form-control-alternative"
+                          id="input-address"
+                          placeholder="Address"
+                          defaultValue={user.address}
+                          name="address"
+                          type="text"
+                          onChange={this.handleOnChange}
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col lg="4">
+                      <FormGroup>
+                        <label
+                          className="form-control-label"
+                          htmlFor="input-city"
+                        >
+                          City
+                        </label>
+                        <Input
+                          className="form-control-alternative"
+                          id="input-city"
+                          placeholder="City"
+                          type="text"
+                        />
+                      </FormGroup>
+                    </Col>
+                    <Col lg="4">
+                      <FormGroup>
+                        <label
+                          className="form-control-label"
+                          htmlFor="input-country"
+                        >
+                          Country
+                        </label>
+                        <Input
+                          className="form-control-alternative"
+                          id="input-country"
+                          placeholder="Country"
+                          type="text"
+                        />
+                      </FormGroup>
+                    </Col>
+                    <Col lg="4">
+                      <FormGroup>
+                        <label
+                          className="form-control-label"
+                          htmlFor="input-country"
+                        >
+                          Postal code
+                        </label>
+                        <Input
+                          className="form-control-alternative"
+                          id="input-postal-code"
+                          placeholder="Postal code"
+                          type="number"
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                </div>
+                <hr className="my-4" />
+                {/* Description */}
+                <h6 className="heading-small text-muted mb-4">About me</h6>
+                <div className="pl-lg-4">
+                  <FormGroup>
+                    <label>About Me</label>
+                    <Input
+                      className="form-control-alternative"
+                      placeholder={user.description}
+                      defaultValue={user.description}
+                      rows="4"
+                      type="textarea"
+                      name="description"
+                      onChange={this.handleOnChange}
+                    />
+                  </FormGroup>
+                </div>
+                <div className="modal-footer">
+                  <Button
+                    color="secondary"
+                    data-dismiss="modal"
+                    type="button"
+                    onClick={() => this.toggleModal("profileModalOpen")}
+                  >
+                    Close
+                  </Button>
+                  <Button color="primary" type="submit">
+                    Save changes
+                  </Button>
+                </div>
+              </Form>
+            </CardBody>
+        </Modal>
       </>
     );
   }
 }
 
-export default Profile;
+const mapStateToProps = state => ({
+  user: state.userReducer.user
+})
+
+
+export default connect(mapStateToProps, {updateUser, deleteUser})(Profile)

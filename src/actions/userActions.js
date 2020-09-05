@@ -77,3 +77,45 @@ export const autoLogin = () => {
     }
   }
 }
+
+export const updateUser = (id, updatedInfo) => {
+  return async dispatch => {
+    try {
+      const res = await fetch(`http://localhost:3000/users/${id}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify(updatedInfo)
+      })
+      const userData = await res.json()
+      console.log('updated user', userData)
+      dispatch(setUser(userData.user))
+    }
+    catch(error) {
+      // add log file
+      console.log('Update User Info Error:', error)
+    }
+  }
+}
+
+export const deleteUser = (id) => {
+  return async dispatch => {
+    try {
+      await fetch(`http://localhost:3000/users/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+      })
+      console.log('deleted user')
+      dispatch(logOutUser())
+    }
+    catch(error) {
+      // add log file
+      console.log('Delete User Error:', error)
+    }
+  }
+}

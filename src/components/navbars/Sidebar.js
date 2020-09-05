@@ -78,7 +78,7 @@ class Sidebar extends React.Component {
   }
 
   render() {
-    const { bgColor, routes, logo } = this.props;
+    const { bgColor, routes, logo, user } = this.props;
     let navbarBrandProps;
     if (logo && logo.innerLink) {
       navbarBrandProps = {
@@ -91,6 +91,7 @@ class Sidebar extends React.Component {
         target: "_blank"
       };
     }
+
     return (
       <Navbar
         className="navbar-vertical fixed-left navbar-light bg-white"
@@ -139,7 +140,7 @@ class Sidebar extends React.Component {
                   <span className="avatar avatar-sm rounded-circle">
                     <img
                       alt="..."
-                      src={require("../../assets/img/theme/carly_img.png")}
+                      src={user.profile_img}
                     />_
                   </span>
                 </Media>
@@ -257,4 +258,8 @@ Sidebar.propTypes = {
   })
 };
 
-export default connect(null, {logOutUser})(Sidebar)
+const mapStateToProps = state => ({
+  user: state.userReducer.user
+})
+
+export default connect(mapStateToProps, {logOutUser})(Sidebar)
