@@ -19,8 +19,8 @@ class App extends Component {
       <BrowserRouter>
       { localStorage.token ?
         <Switch>
-          <Route path="/admin" component={AdminLayout} />
-          <Redirect from="*" to="/admin" />
+          <Route path="/" component={AdminLayout} />
+          <Redirect from="*" to="/dashboard" />
         </Switch>
       :
         <Switch>

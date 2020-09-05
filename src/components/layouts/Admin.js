@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom"
+import { Route, Switch } from "react-router-dom"
 import { Container } from "reactstrap";
 
 import AdminNavbar from "../navbars/AdminNavbar"
@@ -8,6 +8,7 @@ import Sidebar from "../navbars/Sidebar"
 
 import routes from "../../routes"
 import Profile from "../Profile"
+import DisplayTeams from "../teams/DisplayTeams"
 
 
 class Admin extends React.Component {
@@ -22,7 +23,7 @@ class Admin extends React.Component {
       if(component.layout === "/admin") {
         return (
           <Route
-            path={component.layout + component.path}
+            path={component.path}
             component={component.component}
             key={index}
           />
@@ -52,7 +53,7 @@ class Admin extends React.Component {
           {...this.props}
           routes={routes}
           logo={{
-            innerLink: "/admin/dashboard",
+            innerLink: "/dashboard",
             imgSrc: require("../../assets/img/brand/simplize-logo.png"),
             imgAlt: "..."
           }}
@@ -64,8 +65,8 @@ class Admin extends React.Component {
           />
           <Switch>
             {this.getRoutes(routes)}
-            <Route to="/admin/profile" component={Profile} />
-            <Redirect from="*" to="/admin/dashboard" />
+            <Route path="/profile" component={Profile} />
+            <Route path="/teams" component={DisplayTeams} />
           </Switch>
           <Container fluid>
             <AdminFooter />

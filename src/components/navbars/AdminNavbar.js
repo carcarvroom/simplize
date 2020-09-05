@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux'
-import { logOutUser } from '../../actions'
+import { logOutUser, getTeams } from '../../actions'
 import { Link } from "react-router-dom";
 
 import {
@@ -25,6 +25,10 @@ class AdminNavbar extends React.Component {
   handleLogout = () => {
     console.log('just logged out!')
     this.props.logOutUser()
+  }
+
+  renderTeams = id => {
+    this.props.getTeams(id)
   }
 
   render() {
@@ -72,15 +76,18 @@ class AdminNavbar extends React.Component {
                   <DropdownItem className="noti-title" header tag="div">
                     <h6 className="text-overflow m-0">Welcome!</h6>
                   </DropdownItem>
-                  <DropdownItem to="/admin/profile" tag={Link}>
+                  <DropdownItem to="/profile" tag={Link}>
                     <i className="ni ni-single-02" />
                     <span>My profile</span>
                   </DropdownItem>
-                  <DropdownItem to="/admin/profile" tag={Link}>
+                  <DropdownItem to="/profile" tag={Link}>
                     <i className="ni ni-settings-gear-65" />
                     <span>Settings</span>
                   </DropdownItem>
-                  <DropdownItem to="/admin/profile" tag={Link}>
+                  <DropdownItem className="noti-title" header tag="div">
+                    <h6 className="text-overflow m-0">Teams</h6>
+                  </DropdownItem>
+                  <DropdownItem to="/teams" tag={Link} onClick={this.renderTeams(user.id)}>
                     <i className="ni ni-calendar-grid-58" />
                     <span>Switch Teams</span>
                   </DropdownItem>
@@ -103,4 +110,4 @@ const mapStateToProps = state => ({
   user: state.userReducer.user
 })
 
-export default connect(mapStateToProps, {logOutUser})(AdminNavbar)
+export default connect(mapStateToProps, {logOutUser, getTeams})(AdminNavbar)
