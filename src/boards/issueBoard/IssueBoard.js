@@ -2,11 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { getIssueBoards } from '../../actions'
 import {
-  Card,
-  CardHeader,
-  Container,
-  Row,
-  UncontrolledTooltip
+  Container
 } from "reactstrap"
 import Header from "../../components/headers/Header"
 import IssueTable from './issueTable'
@@ -22,7 +18,6 @@ class IssueBoard extends React.Component {
     return (
       <>
         <Header />
-        {/* Page content */}
         <Container className="mt--7" fluid>
           {boards.map(board => {
             return <IssueTable key={board.id} board={board}/>

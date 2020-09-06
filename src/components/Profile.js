@@ -59,7 +59,6 @@ class Profile extends React.Component {
     e.preventDefault()
     this.props.updateUser(this.props.user.id, this.state.updateInfo)
     this.toggleModal("profileModalOpen")
-
   }
 
   render() {
