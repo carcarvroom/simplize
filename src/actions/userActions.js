@@ -19,6 +19,7 @@ export const loginUser = user => {
       } else {
         console.log('just logged in!', userData)
         localStorage.setItem('token', userData.token)
+        localStorage.setItem('userId', userData.user.id)
         dispatch(setUser(userData.user))
       }
     }
@@ -46,6 +47,7 @@ export const signUpUser = user => {
       } else {
         console.log('just signed up!', userData)
         localStorage.setItem('token', userData.token)
+        localStorage.setItem('userId', userData.user.id)
         dispatch(setUser(userData.user))
       }
     }
@@ -69,6 +71,7 @@ export const autoLogin = () => {
       const userData = await res.json()
       console.log('auto login', userData)
       localStorage.setItem('token', userData.token)
+      localStorage.setItem('userId', userData.user.id)
       dispatch(setUser(userData.user))
     }
     catch(error) {
