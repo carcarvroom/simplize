@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import {
   Badge,
   Card,
@@ -19,7 +20,10 @@ import {
   UncontrolledTooltip
 } from "reactstrap"
 
-const IssueTable = () => {
+const IssueTable = ({boards, allState}) => {
+
+  console.log('issueTable boards', boards)
+  console.log('this is userState from issueTable', allState)
   return (
     <Row>
       <div className="col">
@@ -699,4 +703,9 @@ const IssueTable = () => {
   )
 }
 
-export default IssueTable
+const mapStateToProps = state => ({
+  boards: state.userReducer.userBoards,
+  allState: state.userReducer
+})
+
+export default connect(mapStateToProps)(IssueTable)
