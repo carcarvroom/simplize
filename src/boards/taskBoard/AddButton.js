@@ -135,4 +135,4 @@ const styles = {
   }
 }
 
-export default connect()(AddButton)
+export default connect(null, {addTaskList, addTaskCard})(AddButton)

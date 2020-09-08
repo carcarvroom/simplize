@@ -6,15 +6,15 @@ import {
   CardBody
 } from "reactstrap"
 
-const TaskCard = ({cardId, text, index}) => {
+const TaskCard = ({card, index}) => {
   return (
     <>
-      <Draggable draggableId={String(cardId)} index={index}>
+      <Draggable draggableId={String(card.id)} index={index}>
         {provided => (
           <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
             <Card>
               <CardBody>
-                <Typography gutterBottom>{text}</Typography>
+                <Typography gutterBottom>{card.description}</Typography>
               </CardBody>
             </Card>
           </div>

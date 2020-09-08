@@ -1,6 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { createIssue } from '../../actions'
 import {
   CardBody,
   CardHeader,

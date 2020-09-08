@@ -5,21 +5,21 @@ import { Draggable, Droppable } from 'react-beautiful-dnd'
 import {Col
 } from "reactstrap"
 
-const TaskList = ({title, cards, listId, index}) => {
-  console.log(cards)
+const TaskList = ({list, index}) => {
+
   return (
-    <Draggable draggableId={String(listId)} index={index}>
+    <Draggable draggableId={String(list.id)} index={index}>
       {provided => (
         <Col >
           <div {...provided.draggableProps} ref={provided.innerRef} {...provided.dragHandleProps}>
-            <Droppable droppableId={String(listId)}>
+            <Droppable droppableId={String(list.id)}>
               {provided => (
                 <div {...provided.droppableProps} ref={provided.innerRef}  >
-                  <h1>{title}</h1>
-                  {cards.map((card, index) => {
-                    return <TaskCard key={card.id} index={index} cardId={card.id} text={card.text}/>
+                  <h1>{list.name}</h1>
+                  {list.tasks.map((card, index) => {
+                    return <TaskCard key={card.id} index={index} card={card}/>
                   })}
-                  <AddCardButton listId={listId}/>
+                  <AddCardButton listId={list.id}/>
                   {provided.placeholder}
                 </div>
               )}

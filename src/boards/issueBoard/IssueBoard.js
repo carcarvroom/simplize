@@ -41,7 +41,7 @@ class IssueBoard extends React.Component {
         </Button>
         <Modal 
         className="modal-dialog-centered"
-        isOpen={this.state.addTableOpen}
+        isOpen={addTableOpen}
         toggle={() => this.toggleAddTableModal('addTableOpen')}
         >
           <AddTableForm toggleAddTableModal={this.toggleAddTableModal}/>
