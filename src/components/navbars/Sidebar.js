@@ -68,6 +68,8 @@ class Sidebar extends React.Component {
             </NavLink>
           </NavItem>
         )
+      } else {
+        return null
       }
     })
   }
@@ -78,7 +80,7 @@ class Sidebar extends React.Component {
   }
 
   render() {
-    const { bgColor, routes, logo, user } = this.props;
+    const { routes, logo, user } = this.props;
     let navbarBrandProps;
     if (logo && logo.innerLink) {
       navbarBrandProps = {

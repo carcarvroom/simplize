@@ -69,7 +69,7 @@ export const autoLogin = () => {
         }
       })
       const userData = await res.json()
-      console.log('auto login', userData)
+      // console.log('auto login', userData)
       localStorage.setItem('token', userData.token)
       localStorage.setItem('userId', userData.user.id)
       dispatch(setUser(userData.user))
@@ -104,7 +104,7 @@ export const updateUser = (id, updatedInfo) => {
   }
 }
 
-export const deleteUser = (id) => {
+export const deleteUser = id => {
   return async dispatch => {
     try {
       await fetch(`http://localhost:3000/users/${id}`, {

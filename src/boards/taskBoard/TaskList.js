@@ -2,11 +2,11 @@ import React from 'react'
 import TaskCard from './TaskCard'
 import AddCardButton from './AddButton'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
-import { FormHelperText } from '@material-ui/core'
 
 const TaskList = ({title, cards, listId, index}) => {
     console.log(cards)
     return (
+      <>
         <Draggable draggableId={String(listId)} index={index}>
             {provided => (
                 <div {...provided.draggableProps} ref={provided.innerRef} {...provided.dragHandleProps}>
@@ -25,6 +25,7 @@ const TaskList = ({title, cards, listId, index}) => {
                 </div>
             )}
         </Draggable>
+        </>
     )
 }
 

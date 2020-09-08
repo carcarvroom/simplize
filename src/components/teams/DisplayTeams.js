@@ -25,7 +25,7 @@ const DisplayTeams = ({teams}) => {
                               {team.name}
                             </CardTitle>
                             <span className=" text-muted mb-0">
-                              {team.users.length}{team.users.length == 1 ? ' member': ' members'}
+                              {team.users.length}{team.users.length === 1 ? ' member': ' members'}
                             </span>
                           </div>
                         </Row>
@@ -34,7 +34,7 @@ const DisplayTeams = ({teams}) => {
                             <i className="fa fa-arrow-up" /> 
                             {team.boards.length}
                           </span>
-                          <span className="text-nowrap">active {team.boards.length == 1 ? ' board' : 'boards'}</span>
+                          <span className="text-nowrap">active {team.boards.length === 1 ? ' board' : 'boards'}</span>
                         </p>
                       </CardBody>
                     </Card>

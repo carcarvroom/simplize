@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 import IssueCard from './issueCard'
 import AddIssueCardForm from './AddIssueCardForm'
+
 import {
   Card,
   CardHeader,
-  CardBody,
   CardFooter,
   Col,
   Pagination,
@@ -14,16 +14,13 @@ import {
   Row,
   Button,
   Modal,
-  Form,
-  FormGroup,
-  Input
+  UncontrolledTooltip
 } from "reactstrap"
 
 const IssueTable = ({board}) => {
   const [addIssueModalOpen, toggleAddIssueModal] = useState(false)
-  console.log('is it open', addIssueModalOpen)
   return (
-    <Row>
+    <Row className="mt-5">
       <div className="col">
         <Card className="shadow">
           <CardHeader className="border-0">
@@ -33,16 +30,29 @@ const IssueTable = ({board}) => {
             <thead className="thead-light">
               <tr>
                 <th scope="col">Issues</th>
-                <th scope="col">Priority</th>
-                <th scope="col">Status</th>
+                <th scope="col" id="UCTT-Priority">Priority</th>
+                <th scope="col" id="UCTT-Status">Status</th>
                 <th scope="col">Assigned to</th>
-                <th scope="col">Resolved</th>
                 <th scope="col">More</th>
+                <UncontrolledTooltip
+                  delay={0}
+                  data-placement="top"
+                  target="UCTT-Priority"
+                >
+                  High / Medium / Low
+                </UncontrolledTooltip>
+                <UncontrolledTooltip
+                  delay={0}
+                  data-placement="top"
+                  target="UCTT-Status"
+                >
+                  Resolved / In Review / Pending
+                </UncontrolledTooltip>
               </tr>
             </thead>
             <tbody>
               {board.tasks.map(issue => {
-                return <IssueCard key={issue.id} issue={issue} />
+                return <IssueCard key={issue.id} issue={issue} boardId={board.id}/>
               })}
             </tbody>
           </Table>
@@ -82,13 +92,6 @@ const IssueTable = ({board}) => {
                     <PaginationLink
                       onClick={e => e.preventDefault()}
                     >
-                      2 <span className="sr-only">(current)</span>
-                    </PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink
-                      onClick={e => e.preventDefault()}
-                    >
                       <i className="fas fa-angle-right" />
                       <span className="sr-only">Next</span>
                     </PaginationLink>
@@ -104,8 +107,9 @@ const IssueTable = ({board}) => {
         isOpen={addIssueModalOpen}
         toggle={() => addIssueModalOpen ? toggleAddIssueModal(false) : toggleAddIssueModal(true)}
       >
-        <AddIssueCardForm />
+        <AddIssueCardForm boardId={board.id} addIssueModalOpen={addIssueModalOpen} toggleAddIssueModal={toggleAddIssueModal}/>
       </Modal>
+
     </Row>
 
   )

@@ -1,11 +1,12 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { createIssue } from '../../actions'
 import {
   CardBody,
   CardHeader,
   Col,
   Row,
   Button,
-  ButtonGroup,
   Form,
   FormGroup,
   Input
@@ -13,20 +14,47 @@ import {
 
 class AddIssueCardForm extends React.Component {
   state = {
-    selectedPriority: null
+    newIssue: {
+      priority: "Low",
+      resolved: false,
+      status: "Pending",
+      owner_id: parseInt(localStorage.getItem('userId')),
+      board_id: this.props.boardId
+    }
   }
 
   handleOnChange = e => {
-    e.preventDefault()
+    e.persist()
+    this.setState({
+      newIssue: {
+        ...this.state.newIssue,
+        [e.target.name]: e.target.value,
+        priority: this.state.selectedPriority
+      }
+    })
   }
 
   handleSelectedPriority = (e, option) => {
     e.persist()
-    this.setState({selectedPriority: option})
+    this.setState({
+      newIssue: {
+        ...this.state.newIssue,
+        priority: option
+      }
+    })
+  }
+
+  handleSubmit = e => {
+    e.preventDefault()
+    // console.log(this.state.newIssue)
+    this.props.createIssue(this.state.newIssue)
+    this.setState({newIssue: {}})
+    this.props.toggleAddIssueModal(false)
+    console.log('after', this.state)
   }
 
   render() {
-    const {selectedPriority} = this.state
+    const {addIssueModalOpen, toggleAddIssueModal} = this.props
     return (
       <> 
         <CardHeader className="bg-white border-0">
@@ -37,7 +65,7 @@ class AddIssueCardForm extends React.Component {
             <Col className="text-right" xs="4">
               <Button
                 color="primary"
-
+                onClick={() => addIssueModalOpen ? toggleAddIssueModal(false) : toggleAddIssueModal(true)}
                 size="sm"
               >
                 X
@@ -46,7 +74,7 @@ class AddIssueCardForm extends React.Component {
           </Row>
         </CardHeader>
         <CardBody>
-          <Form >
+          <Form onSubmit={e => {this.handleSubmit(e)}}>
             <div className="pl-lg-4">
               <Row>
                 <Col lg="6">
@@ -88,34 +116,36 @@ class AddIssueCardForm extends React.Component {
                 <div className="custom-control custom-radio mb-3">
                   <input
                     className="custom-control-input"
-                    id="customRadio5"
+                    id="radio1"
                     name="priority"
                     type="radio"
+                    onClick={e => this.handleSelectedPriority(e, 'High')}
                   />
-                  <label className="custom-control-label" htmlFor="customRadio5">
+                  <label className="custom-control-label" htmlFor="radio1">
                   High
                   </label>
                 </div>
                 <div className="custom-control custom-radio mb-3">
                   <input
                     className="custom-control-input"
-                    id="customRadio6"
+                    id="radio2"
                     name="priority"
                     type="radio"
+                    onClick={e => this.handleSelectedPriority(e, 'Medium')}
                   />
-                  <label className="custom-control-label" htmlFor="customRadio6">
+                  <label className="custom-control-label" htmlFor="radio2">
                     Medium
                   </label>
                 </div>
                 <div className="custom-control custom-radio mb-3">
                   <input
                     className="custom-control-input"
-                    defaultChecked
-                    id="customRadio6"
+                    id="radio3"
                     name="priority"
                     type="radio"
+                    onClick={e => this.handleSelectedPriority(e, 'Low')}
                   />
-                  <label className="custom-control-label" htmlFor="customRadio6">
+                  <label className="custom-control-label" htmlFor="radio3">
                     Low
                   </label>
                 </div>
@@ -126,6 +156,7 @@ class AddIssueCardForm extends React.Component {
                 color="secondary"
                 data-dismiss="modal"
                 type="button"
+                onClick={() => addIssueModalOpen ? toggleAddIssueModal(false) : toggleAddIssueModal(true)}
               >
                 Close
               </Button>
@@ -140,4 +171,4 @@ class AddIssueCardForm extends React.Component {
   }
 }
 
-export default AddIssueCardForm
+export default connect(null, {createIssue})(AddIssueCardForm)

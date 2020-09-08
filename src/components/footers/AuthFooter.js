@@ -13,7 +13,6 @@ const AuthFooter = () => {
                 <a
                   className="font-weight-bold ml-1"
                   href="https://www.linkedin.com/in/carlyla/"
-                  target="_blank"
                 >
                   Carly La
                 </a>
@@ -24,7 +23,7 @@ const AuthFooter = () => {
                 {/* <NavItem>
                   <NavLink
                     href="#"
-                    target="_blank"
+
                   >
                     Website
                   </NavLink>
@@ -32,7 +31,7 @@ const AuthFooter = () => {
                 <NavItem>
                   <NavLink
                     href="https://medium.com/@carly_l"
-                    target="_blank"
+
                   >
                     Blog
                   </NavLink>
@@ -40,7 +39,7 @@ const AuthFooter = () => {
                 <NavItem>
                   <NavLink
                     href="https://github.com/carcarvroom"
-                    target="_blank"
+
                   >
                     Github
                   </NavLink>
