@@ -1,17 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { getListsByBoardId, sort } from '../../actions'
+import { getListsByBoardId, editTaskboard, deleteTaskboard, sort } from '../../actions'
 import TaskList from './TaskList'
 import AddList from './AddList'
 
+import Textarea from 'react-textarea-autosize'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import {
   Col,
   Row,
   Card,
   CardHeader,
-  CardBody
+  CardBody,
+  Button
 } from "reactstrap"
 
 class TaskTable extends Component {
@@ -19,36 +21,109 @@ class TaskTable extends Component {
     this.props.getListsByBoardId(this.props.board.id)
   }
 
-  onDragEnd = (result) => {
-  const {destination, source, draggableId, type} = result
-
-  if(!destination) {
-    return
+  state = {
+    editTableOpen: false,
+    name: ''
   }
 
-  this.props.dispatch(sort(
-    source.droppableId,
-    destination.droppableId,
-    source.index,
-    destination.index,
-    draggableId,
-    type
-  ))
+  toggleEditTableOpen = state => {
+    console.log('hi')
+    this.setState({
+      [state]: !this.state[state]
+    })
+  }
+
+  handleInputChange = e => {
+    e.persist()
+    this.setState({
+      name: e.target.value
+    })
+  }
+
+  handleEditTableSubmit = () => {
+    this.props.editTaskboard(this.props.board.id, {name: this.state.name})
+  }
+
+  handleDeleteTable = () => {
+    this.props.deleteTaskboard(this.props.board.id)
+  }
+
+  onDragEnd = (result) => {
+    const {destination, source, draggableId, type} = result
+
+    if(!destination) {
+      return
+    }
+
+    this.props.dispatch(sort(
+      source.droppableId,
+      destination.droppableId,
+      source.index,
+      destination.index,
+      draggableId,
+      type
+    ))
   }
 
   render() {
     const { board, lists } = this.props
+    const { editTableOpen, name } = this.state
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <Droppable droppableId='all-lists' direction='horizontal' type='list'>
           {provided => (
             <div {...provided.droppableProps} ref={provided.innerRef}>
-              <Row>
+              <Row className="mt-5">
                 <div className="col">
                   <Card className="shadow">
-                    <CardHeader className="border-0">
-                      <h3 className="mb-0">{board.name}</h3>
+                    { !editTableOpen ?
+                      <CardHeader className="border-0"
+                      onClick={() => {
+                        this.toggleEditTableOpen("editTableOpen")
+                        this.setState({name: board.name})
+                      }}
+                      >
+                        <h3 className="mb-0">{board.name}</h3>
                       </CardHeader>
+                    :
+                      <div>
+                        <Textarea 
+                        value={name}
+                        autoFocus 
+                        onBlur={() => this.toggleEditTableOpen("editTableOpen")}
+                        name="name"
+                        onChange={this.handleInputChange}
+                        style={{
+                          resize: 'none',
+                          width: '100%',
+                          overflow: 'hidden',
+                          outline: 'none',
+                          border: 'none'
+                        }}
+                        />
+                        <Button 
+                        color="primary"
+                        size="sm" type="button"
+                        onMouseDown={this.handleEditTableSubmit}
+                        variant='contained' >
+                          Edit Board Name
+                        </Button>
+                        <Button
+                          onClick={() => this.toggleEditTableOpen("editTableOpen")}
+                          size="sm" type="button"
+                        >
+                          X
+                        </Button>
+                        <Button
+                          className="float-right"
+                          color="danger"
+                          onMouseDown={this.handleDeleteTable}
+                          size="sm" type="button"
+                        >
+                          Delete Taskboard
+                        </Button>
+                      </div>
+                    }
                       <CardBody>
                         <Row>
                           {lists.map((list, index) => {
@@ -72,4 +147,4 @@ const mapStateToProps = state => ({
   lists: state.taskReducer.lists
 })
 
-export default connect(mapStateToProps, {getListsByBoardId})(TaskTable)
+export default connect(mapStateToProps, {getListsByBoardId, editTaskboard, deleteTaskboard})(TaskTable)

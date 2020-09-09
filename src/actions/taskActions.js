@@ -15,6 +15,71 @@ export const getTaskBoards = userId => {
   }
 }
 
+export const createTaskboard = taskboard => {
+  return async dispatch => {
+    try {
+      const res = await fetch(`http://localhost:3000/boards`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify(taskboard)
+      })
+      const newTaskboard = await res.json()
+      if(newTaskboard.error) {
+          alert(newTaskboard.error)
+      } else {
+        console.log('created new taskboard!', newTaskboard)
+        dispatch(getTaskBoards(parseInt(localStorage.getItem('userId'))))
+      }
+    }
+    catch(error) {
+      console.log('Create Taskboard Error:', error)
+    }
+  }
+}
+
+export const editTaskboard = (boardId, updatedInfo) => {
+  return async dispatch => {
+    try {
+      const res = await fetch(`http://localhost:3000/boards/${boardId}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify(updatedInfo)
+      })
+      const taskboardUpdated = await res.json()
+      console.log('updated taskboard', taskboardUpdated)
+      dispatch(getTaskBoards(parseInt(localStorage.getItem('userId'))))
+    }
+    catch(error) {
+      console.log('Update Taskboard Error:', error)
+    }
+  }
+}
+
+export const deleteTaskboard = boardId => {
+  return async dispatch => {
+    try {
+      await fetch(`http://localhost:3000/boards/${boardId}`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+      })
+      dispatch(getTaskBoards(parseInt(localStorage.getItem('userId'))))
+    }
+    catch(error) {
+      console.log('Delete Taskboard Error:', error)
+    }
+  }
+}
+
 export const getListsByBoardId = boardId => {
   return async dispatch => {
     try {

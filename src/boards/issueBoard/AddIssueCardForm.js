@@ -64,12 +64,9 @@ class AddIssueCardForm extends React.Component {
             </Col>
             <Col className="text-right" xs="4">
               <Button
-                color="primary"
                 onClick={() => addIssueModalOpen ? toggleAddIssueModal(false) : toggleAddIssueModal(true)}
-                size="sm"
-              >
-                X
-              </Button>
+                close
+             />
             </Col>
           </Row>
         </CardHeader>

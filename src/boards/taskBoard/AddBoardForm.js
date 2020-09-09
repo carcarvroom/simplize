@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { createIssueboard } from '../../actions'
+import { createTaskboard } from '../../actions'
 import {
   CardBody,
   CardHeader,
@@ -12,10 +12,10 @@ import {
   Input
 } from "reactstrap"
 
-class AddTableForm extends React.Component {
+class AddBoardForm extends React.Component {
   state = {
-    newIssueboard: {
-      board_type: 'issueboard',
+    newTaskboard: {
+      board_type: 'taskboard',
       user_id: parseInt(localStorage.getItem('userId'))
     }
   }
@@ -23,8 +23,8 @@ class AddTableForm extends React.Component {
   handleOnChange = e => {
     e.persist()
     this.setState({
-      newIssueboard: {
-        ...this.state.newIssueboard,
+      newTaskboard: {
+        ...this.state.newTaskboard,
         [e.target.name]: e.target.value
       }
     })
@@ -32,22 +32,22 @@ class AddTableForm extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    this.props.createIssueboard(this.state.newIssueboard)
-    this.props.toggleAddTableModal('addTableOpen')
+    this.props.createTaskboard(this.state.newTaskboard)
+    this.props.toggleAddBoardForm('addBoardFormOpen')
   }
 
   render() {
-    const {toggleAddTableModal} = this.props
+    const {toggleAddBoardForm} = this.props
     return (
       <> 
         <CardHeader className="bg-white border-0">
           <Row className="align-items-center">
             <Col xs="8">
-              <h3 className="mb-0">New Issue Board</h3>
+              <h3 className="mb-0">New Task Board</h3>
             </Col>
             <Col className="text-right" xs="4">
               <Button
-                onClick={() => toggleAddTableModal('addTableOpen')}
+                onClick={() => toggleAddBoardForm('addBoardFormOpen')}
                 close
               />
             </Col>
@@ -63,7 +63,7 @@ class AddTableForm extends React.Component {
                       className="form-control-label"
                       htmlFor="input-title"
                     >
-                      Issue Board Name
+                      Task Board Name
                     </label>
                     <Input
                       className="form-control-alternative"
@@ -82,12 +82,12 @@ class AddTableForm extends React.Component {
                 color="secondary"
                 data-dismiss="modal"
                 type="button"
-                onClick={() => this.toggleAddTableModal('addTableOpen')}
+                onClick={() => toggleAddBoardForm('addBoardFormOpen')}
               >
                 Close
               </Button>
               <Button color="primary" type="submit">
-                Create Issue Board
+                Create Task Board
               </Button>
             </div>
           </Form>
@@ -97,4 +97,4 @@ class AddTableForm extends React.Component {
   }
 }
 
-export default connect(null, {createIssueboard})(AddTableForm)
+export default connect(null, {createTaskboard})(AddBoardForm)

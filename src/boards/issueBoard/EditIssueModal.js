@@ -61,12 +61,9 @@ class EditIssueModal extends React.Component {
             </Col>
             <Col className="text-right" xs="4">
               <Button
-                color="primary"
                 onClick={() => editIssueModalOpen ? toggleEditIssueModal(false) : toggleEditIssueModal(true)}
-                size="sm"
-              >
-                X
-              </Button>
+                close
+              />
             </Col>
           </Row>
         </CardHeader>
