@@ -1,16 +1,16 @@
 import React from 'react'
 import TaskCard from './TaskCard'
-import AddCardButton from './AddButton'
+import AddCard from './AddCard'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
 import {Col
 } from "reactstrap"
 
-const TaskList = ({list, index}) => {
+const TaskList = ({boardId, list, index}) => {
 
   return (
     <Draggable draggableId={String(list.id)} index={index}>
       {provided => (
-        <Col >
+        <Col>
           <div {...provided.draggableProps} ref={provided.innerRef} {...provided.dragHandleProps}>
             <Droppable droppableId={String(list.id)}>
               {provided => (
@@ -19,7 +19,7 @@ const TaskList = ({list, index}) => {
                   {list.tasks.map((card, index) => {
                     return <TaskCard key={card.id} index={index} card={card}/>
                   })}
-                  <AddCardButton listId={list.id}/>
+                  <AddCard listId={list.id} nextCard={list.tasks.length} boardId={boardId}/>
                   {provided.placeholder}
                 </div>
               )}

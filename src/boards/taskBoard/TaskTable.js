@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { getListsByBoardId, sort } from '../../actions'
 import TaskList from './TaskList'
-import AddListButton from './AddButton'
+import AddList from './AddList'
 
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import {
@@ -51,12 +51,12 @@ class TaskTable extends Component {
                       </CardHeader>
                       <CardBody>
                         <Row>
-                      {lists.map((list, index) => {
-                        return <TaskList key={list.id} index={index} list={list} />
-                      })}
+                          {lists.map((list, index) => {
+                            return <TaskList key={list.id} index={index} list={list} boardId={board.id}/>
+                          })}
+                        <Col><AddList boardId={board.id} nextList={lists.length}/></Col>
                       </Row>
                       </CardBody>
-                    <Col><AddListButton list/></Col>
                   </Card>
                 </div>
               </Row>

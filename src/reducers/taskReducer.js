@@ -45,15 +45,6 @@ const taskReducer = (state = initialState, action) => {
         ...state,
         lists: [...action.payload]
       }
-    // case CONSTANTS.ADD_LIST:
-    //   const newList = {
-    //       title: action.payload,
-    //       id: `list-${listId}`,
-    //       cards: []
-    //   }
-    //   listId += 1
-    //   return {...state, lists: [...state.lists, newList]}
-
     // case CONSTANTS.ADD_CARD: {
     //   const newCard = {
     //     text: action.payload.text,
