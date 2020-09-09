@@ -17,7 +17,7 @@ const TaskList = ({boardId, list, index}) => {
                 <div {...provided.droppableProps} ref={provided.innerRef}  >
                   <h1>{list.name}</h1>
                   {list.tasks.map((card, index) => {
-                    return <TaskCard key={card.id} index={index} card={card}/>
+                    return <TaskCard key={card.id} index={index} card={card} boardId={boardId}/>
                   })}
                   <AddCard listId={list.id} nextCard={list.tasks.length} boardId={boardId}/>
                   {provided.placeholder}

@@ -43,7 +43,6 @@ export const createIssue = issue => {
 export const deleteIssue = (taskId, boardId) => {
   return async dispatch => {
     try {
-
       await fetch(`http://localhost:3000/tasks/${taskId}`, {
         method: "DELETE",
         headers: {

@@ -89,6 +89,45 @@ export const addTaskCard = task => {
   }
 }
 
+export const editTaskCard = (cardId, updatedInfo, boardId) => {
+  return async dispatch => {
+    try {
+      const res = await fetch(`http://localhost:3000/tasks/${cardId}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify(updatedInfo)
+      })
+      const taskUpdated = await res.json()
+      console.log('updated task', taskUpdated)
+      dispatch(getListsByBoardId(boardId))
+    }
+    catch(error) {
+      console.log('Update Task Card Error:', error)
+    }
+  }
+}
+
+export const deleteTask = (taskId, boardId) => {
+  return async dispatch => {
+    try {
+      await fetch(`http://localhost:3000/tasks/${taskId}`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+      })
+      dispatch(getListsByBoardId(boardId))
+    }
+    catch(error) {
+      console.log('Delete Task Error:', error)
+    }
+  }
+}
+
 export const sort = (
   droppableIdStart,
   droppableIdEnd,
@@ -109,10 +148,3 @@ export const sort = (
     }
   }
 }
-
-// export const addTaskCard = (listId, text) => {
-//   return {
-//       type: "ADD_CARD",
-//       payload: {text, listId}
-//   }
-//  }
