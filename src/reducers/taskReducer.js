@@ -31,24 +31,6 @@ const taskReducer = (state = initialState, action) => {
         ...state,
         lists: [...action.payload]
       }
-    // case CONSTANTS.ADD_CARD: {
-    //   const newCard = {
-    //     text: action.payload.text,
-    //     id: `card-${cardId}`
-    //   }
-    //   cardId += 1
-    //   const newState = state.lists.map(list => {
-    //     if(list.id === action.payload.listId) {
-    //       return {
-    //         ...list,
-    //         cards: [...list.cards, newCard]
-    //       }
-    //     } else {
-    //       return list
-    //     }
-    //   })
-    //   return {...state, lists: [newState]}
-    // }
     // case CONSTANTS.DRAGGED: 
     //   const {droppableIdStart,
     //     droppableIdEnd,
@@ -57,6 +39,7 @@ const taskReducer = (state = initialState, action) => {
     //     // draggableId,
     //     type
     //   } = action.payload
+
     //   const newState = [...state]
     //   if(type === 'list') {
     //     const list = newState.splice(droppableIndexStart, 1)

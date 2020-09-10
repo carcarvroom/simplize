@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { getListsByBoardId, editTaskboard, deleteTaskboard, sort } from '../../actions'
+import { getListsByBoardId, editTaskboard, deleteTaskboard, editListPosition, sort } from '../../actions'
 import TaskList from './TaskList'
 import AddList from './AddList'
 
@@ -23,7 +23,8 @@ class TaskTable extends Component {
 
   state = {
     editTableOpen: false,
-    name: ''
+    name: '',
+    updateLists: false
   }
 
   toggleEditTableOpen = state => {
@@ -49,11 +50,40 @@ class TaskTable extends Component {
 
   onDragEnd = (result) => {
     const {destination, source, draggableId, type} = result
-    // console.log('results', result)
-
+    // console.log('original list order', this.props.lists)
+    console.log('results', result)
+    
     // if(!destination) {
-    //   return
-    // }
+      //   return
+      // }
+    if(type === 'list') {
+      let newListOrder = [...this.props.lists]
+      const list = newListOrder.splice(source.index, 1)
+      newListOrder.splice(destination.index, 0, ...list)
+      newListOrder.forEach((list, index) => {
+        if(index == newListOrder.length-1) {
+          this.props.editListPosition(list.id, {position: index+1}, this.props.board.id)
+        } else {
+          this.props.editListPosition(list.id, {position: index+1})
+        }
+      })
+    }
+
+    if(type !== 'list' && source.droppableId === destination.droppableId) {
+      // const list = this.props..find(list => droppableIdStart === list.id)
+      // const card = list.cards.splice(droppableIndexStart, 1)
+      // list.cards.splice(droppableIndexEnd, 0, ...card)
+      //find list id
+      // update card list
+      //dispatch action
+    }
+
+    //   if(droppableIdStart !== droppableIdEnd) {
+    //     const listStart = state.find(list => droppableIdStart === list.id)
+    //     const card = listStart.cards.splice(droppableIndexStart, 1)
+    //     const listEnd = state.find(list => droppableIdEnd === list.id)
+    //     listEnd.cards.splice(droppableIndexEnd, 0, ...card)
+    //   }
 
     // this.props.dispatch(sort(
     //   source.droppableId,
@@ -148,4 +178,4 @@ const mapStateToProps = state => ({
   lists: state.taskReducer.lists
 })
 
-export default connect(mapStateToProps, {getListsByBoardId, editTaskboard, deleteTaskboard})(TaskTable)
+export default connect(mapStateToProps, {getListsByBoardId, editTaskboard, deleteTaskboard, editListPosition})(TaskTable)

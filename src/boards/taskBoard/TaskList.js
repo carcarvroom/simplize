@@ -29,7 +29,7 @@ const TaskList = ({boardId, list, index, editListName, deleteList}) => {
   }
 
   return (
-    <Draggable draggableId={list.position} index={index}>
+    <Draggable draggableId={String(list.id)} index={index}>
       {(provided) => (
         <Col>
           <div>

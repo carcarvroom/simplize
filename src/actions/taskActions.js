@@ -93,7 +93,7 @@ export const getListsByBoardId = boardId => {
           position: `list-${list.position}`
         }
       })
-      console.log('fetched lists and sorted', sortedLists)
+      // console.log('fetched lists and sorted', sortedLists)
       dispatch(loadLists(sortedLists))
     }
     catch(error) {
@@ -205,12 +205,34 @@ export const editListName = (listId, updatedInfo, boardId) => {
         },
         body: JSON.stringify(updatedInfo)
       })
-      const lsitUpdated = await res.json()
-      console.log('updated list', lsitUpdated)
+      const listUpdated = await res.json()
+      console.log('updated list', listUpdated)
       dispatch(getListsByBoardId(boardId))
     }
     catch(error) {
       console.log('Update List Name Error:', error)
+    }
+  }
+}
+
+export const editListPosition = (listId, updatedInfo, boardId=null) => {
+  return async dispatch => {
+    try {
+      const res = await fetch(`http://localhost:3000/lists/${listId}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify(updatedInfo)
+      })
+      if(boardId) {
+        dispatch(getListsByBoardId(boardId))
+      }
+    }
+    catch(error) {
+      console.log('Update List Position Error:', error)
     }
   }
 }
