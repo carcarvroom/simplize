@@ -41,12 +41,7 @@ const taskReducer = (state = initialState, action) => {
     //   } = action.payload
 
     //   const newState = [...state]
-      
-    //   if(droppableIdStart === droppableIdEnd) {
-    //     const list = state.find(list => droppableIdStart === list.id)
-    //     const card = list.cards.splice(droppableIndexStart, 1)
-    //     list.cards.splice(droppableIndexEnd, 0, ...card)
-    //   }
+    
 
     //   if(droppableIdStart !== droppableIdEnd) {
     //     const listStart = state.find(list => droppableIdStart === list.id)

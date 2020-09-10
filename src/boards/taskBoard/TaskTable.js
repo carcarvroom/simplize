@@ -49,12 +49,13 @@ class TaskTable extends Component {
   }
 
   onDragEnd = (result) => {
-    const {destination, source, draggableId, type} = result
+    const {destination, source, type} = result
     console.log('results', result)
     
-    // if(!destination) {
-      //   return
-      // }
+    if(!destination) {
+        return
+    }
+
     if(type === 'list') {
       let newListOrder = [...this.props.lists]
       const list = newListOrder.splice(source.index, 1)
@@ -81,27 +82,25 @@ class TaskTable extends Component {
       })
     }
 
-    //   if(droppableIdStart !== droppableIdEnd) {
-    //     const listStart = state.find(list => droppableIdStart === list.id)
-    //     const card = listStart.cards.splice(droppableIndexStart, 1)
-    //     const listEnd = state.find(list => droppableIdEnd === list.id)
-    //     listEnd.cards.splice(droppableIndexEnd, 0, ...card)
-    //   }
-
-    // this.props.dispatch(sort(
-    //   source.droppableId,
-    //   destination.droppableId,
-    //   source.index,
-    //   destination.index,
-    //   draggableId,
-    //   type
-    // ))
+    if(type !== 'list' && source.droppableId !== destination.droppableId) {
+      const listStart = this.props.lists.find(list => parseInt(source.droppableId) === list.id)
+      const card = listStart.tasks.splice(source.index, 1)
+      this.props.editTaskPosition(card[0].id, {list_id: parseInt(destination.droppableId)})
+      const listEnd = this.props.lists.find(list => parseInt(destination.droppableId) === list.id)
+      listEnd.tasks.splice(destination.index, 0, ...card)
+      listEnd.tasks.forEach((task, index) => {
+        if(index === listEnd.tasks.length-1) {
+          this.props.editTaskPosition(task.id, {title: `${index+1}`}, this.props.board.id)
+        } else {
+          this.props.editTaskPosition(task.id, {title: `${index+1}`})
+        }
+      })
+    }
   }
 
   render() {
     const { board, lists } = this.props
     const { editTableOpen, name } = this.state
-    // console.log('lists', lists)
     return (
       <DragDropContext onDragEnd={this.onDragEnd} >
         <Row className="mt-5">
