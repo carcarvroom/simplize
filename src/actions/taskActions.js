@@ -110,8 +110,6 @@ export const getListsByBoardId = boardId => {
             })
           }
       })
-      // console.log('fetched lists and sorted', sortedLists)
-      // console.log('sorted tasks', listSortedTasks)
       dispatch(loadLists(listSortedTasks))
     }
     catch(error) {
@@ -290,27 +288,6 @@ export const deleteList = (listId, boardId) => {
     }
     catch(error) {
       console.log('Delete List Error:', error)
-    }
-  }
-}
-
-export const sort = (
-  droppableIdStart,
-  droppableIdEnd,
-  droppableIndexStart,
-  droppableIndexEnd,
-  draggableId,
-  type
-  ) => {
-  return {
-    type: "DRAGGED",
-    payload: {
-      droppableIdStart,
-      droppableIdEnd,
-      droppableIndexStart,
-      droppableIndexEnd,
-      draggableId,
-      type
     }
   }
 }

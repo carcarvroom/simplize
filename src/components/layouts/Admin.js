@@ -42,7 +42,7 @@ class Admin extends React.Component {
           routes={routes}
           logo={{
             innerLink: "/dashboard",
-            imgSrc: require("../../assets/img/brand/simplize-logo.png"),
+            imgSrc: require("../../assets/img/brand/blue-simplize-logo.png"),
             imgAlt: "..."
           }}
         />
