@@ -23,8 +23,7 @@ class TaskTable extends Component {
 
   state = {
     editTableOpen: false,
-    name: '',
-    updateLists: false
+    name: ''
   }
 
   toggleEditTableOpen = state => {

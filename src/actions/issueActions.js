@@ -14,6 +14,45 @@ export const getIssueBoards = userId => {
   }
 }
 
+export const editIssueboard = (boardId, updatedInfo) => {
+  return async dispatch => {
+    try {
+      const res = await fetch(`http://localhost:3000/boards/${boardId}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify(updatedInfo)
+      })
+      const issueboardUpdated = await res.json()
+      console.log('updated issueboard', issueboardUpdated)
+      dispatch(getIssueBoards(parseInt(localStorage.getItem('userId'))))
+    }
+    catch(error) {
+      console.log('Update Issueboard Error:', error)
+    }
+  }
+}
+
+export const deleteIssueboard = boardId => {
+  return async dispatch => {
+    try {
+      await fetch(`http://localhost:3000/boards/${boardId}`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+      })
+      dispatch(getIssueBoards(parseInt(localStorage.getItem('userId'))))
+    }
+    catch(error) {
+      console.log('Delete Issueboard Error:', error)
+    }
+  }
+}
+
 export const createIssue = issue => {
   return async dispatch => {
     try {

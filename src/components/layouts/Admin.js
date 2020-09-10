@@ -43,7 +43,7 @@ class Admin extends React.Component {
           logo={{
             innerLink: "/dashboard",
             imgSrc: require("../../assets/img/brand/blue-simplize-logo.png"),
-            imgAlt: "..."
+            imgAlt: "simplize-logo"
           }}
         />
         <div className="main-content" ref="mainContent">

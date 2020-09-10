@@ -1,7 +1,9 @@
 import React, {useState} from 'react'
+import { connect } from 'react-redux'
+import { editIssueboard, deleteIssueboard } from '../../actions'
 import IssueCard from './issueCard'
 import AddIssueCardForm from './AddIssueCardForm'
-
+import Textarea from 'react-textarea-autosize'
 import {
   Card,
   CardHeader,
@@ -17,15 +19,75 @@ import {
   UncontrolledTooltip
 } from "reactstrap"
 
-const IssueTable = ({board}) => {
+const IssueTable = ({board, editIssueboar, deleteIssueboard}) => {
   const [addIssueModalOpen, toggleAddIssueModal] = useState(false)
+  const [editBoardOpen, toggleEditBoardOpen] = useState(false)
+  const [boardName, setBoardName] = useState(board.name)
+
+  const handleEditBoardSubmit = () => {
+    editIssueboard(board.id, {name: boardName})
+  }
+
+  const handleInputChange = e => {
+    setBoardName(e.target.value)
+  }
+
+  const handleDeleteBoard = () => {
+    deleteIssueboard(board.id)
+  }
+
   return (
     <Row className="mt-4">
       <div className="col">
         <Card className="shadow">
-          <CardHeader className="border-0">
-            <h3 className="mb-0">{board.name}</h3>
-          </CardHeader>
+          { !editBoardOpen ?
+              <CardHeader className="border-2"
+                onClick={() => {
+                toggleEditBoardOpen(true)
+                setBoardName(board.name)
+              }}
+              >
+                <h3 className="mb-0">{board.name}</h3>
+              </CardHeader>
+            :
+              <div>
+                <Textarea 
+                value={boardName}
+                autoFocus 
+                onBlur={() => toggleEditBoardOpen(false)}
+                name="name"
+                onChange={e => handleInputChange(e)}
+                style={{
+                  resize: 'none',
+                  width: '100%',
+                  overflow: 'hidden',
+                  outline: 'none',
+                  border: 'none'
+                }}
+                />
+                <Button 
+                color="primary"
+                size="sm" type="button"
+                onMouseDown={() => handleEditBoardSubmit()}
+                variant='contained' >
+                  Edit Board Name
+                </Button>
+                <Button
+                  onClick={() => toggleEditBoardOpen(false)}
+                  size="sm" type="button"
+                >
+                  X
+                </Button>
+                <Button
+                  className="float-right"
+                  color="danger"
+                  onMouseDown={() => handleDeleteBoard()}
+                  size="sm" type="button"
+                >
+                  Delete Issue Board
+                </Button>
+              </div>
+            }
           <Table className="align-items-center table-flush" responsive>
             <thead className="thead-light">
               <tr>
@@ -115,4 +177,4 @@ const IssueTable = ({board}) => {
   )
 }
 
-export default (IssueTable)
+export default connect(null, {editIssueboard, deleteIssueboard})(IssueTable)
