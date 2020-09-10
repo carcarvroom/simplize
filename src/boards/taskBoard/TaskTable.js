@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { getListsByBoardId, editTaskboard, deleteTaskboard, editListPosition, sort } from '../../actions'
+import { getListsByBoardId, editTaskboard, deleteTaskboard, editListPosition, editTaskPosition } from '../../actions'
 import TaskList from './TaskList'
 import AddList from './AddList'
 
@@ -50,7 +50,6 @@ class TaskTable extends Component {
 
   onDragEnd = (result) => {
     const {destination, source, draggableId, type} = result
-    // console.log('original list order', this.props.lists)
     console.log('results', result)
     
     // if(!destination) {
@@ -61,7 +60,7 @@ class TaskTable extends Component {
       const list = newListOrder.splice(source.index, 1)
       newListOrder.splice(destination.index, 0, ...list)
       newListOrder.forEach((list, index) => {
-        if(index == newListOrder.length-1) {
+        if(index === newListOrder.length-1) {
           this.props.editListPosition(list.id, {position: index+1}, this.props.board.id)
         } else {
           this.props.editListPosition(list.id, {position: index+1})
@@ -70,12 +69,16 @@ class TaskTable extends Component {
     }
 
     if(type !== 'list' && source.droppableId === destination.droppableId) {
-      // const list = this.props..find(list => droppableIdStart === list.id)
-      // const card = list.cards.splice(droppableIndexStart, 1)
-      // list.cards.splice(droppableIndexEnd, 0, ...card)
-      //find list id
-      // update card list
-      //dispatch action
+      const list = this.props.lists.find(list => parseInt(source.droppableId) === list.id)
+      const card = list.tasks.splice(source.index, 1)
+      list.tasks.splice(destination.index, 0, ...card)
+      list.tasks.forEach((task, index) => {
+        if(index === list.tasks.length-1) {
+          this.props.editTaskPosition(task.id, {title: `${index+1}`}, this.props.board.id)
+        } else {
+          this.props.editTaskPosition(task.id, {title: `${index+1}`})
+        }
+      })
     }
 
     //   if(droppableIdStart !== droppableIdEnd) {
@@ -98,6 +101,7 @@ class TaskTable extends Component {
   render() {
     const { board, lists } = this.props
     const { editTableOpen, name } = this.state
+    // console.log('lists', lists)
     return (
       <DragDropContext onDragEnd={this.onDragEnd} >
         <Row className="mt-5">
@@ -178,4 +182,4 @@ const mapStateToProps = state => ({
   lists: state.taskReducer.lists
 })
 
-export default connect(mapStateToProps, {getListsByBoardId, editTaskboard, deleteTaskboard, editListPosition})(TaskTable)
+export default connect(mapStateToProps, {getListsByBoardId, editTaskboard, deleteTaskboard, editListPosition, editTaskPosition})(TaskTable)

@@ -93,8 +93,26 @@ export const getListsByBoardId = boardId => {
           position: `list-${list.position}`
         }
       })
+      const listSortedTasks = sortedLists.map(list => {
+        return {...list,
+          tasks: list.tasks.sort((a, b) => {
+            return parseInt(a.title) - parseInt(b.title)
+          })
+        }
+      }).map(list => {
+          return {
+            ...list,
+            tasks: list.tasks.map(task => {
+              return {
+                ...task,
+                title: `card-${task.title}`
+              }
+            })
+          }
+      })
       // console.log('fetched lists and sorted', sortedLists)
-      dispatch(loadLists(sortedLists))
+      // console.log('sorted tasks', listSortedTasks)
+      dispatch(loadLists(listSortedTasks))
     }
     catch(error) {
       console.log('Task Board List Fetch Error:', error)
@@ -189,6 +207,28 @@ export const deleteTask = (taskId, boardId) => {
     }
     catch(error) {
       console.log('Delete Task Error:', error)
+    }
+  }
+}
+
+export const editTaskPosition = (taskId, updatedInfo, boardId=null) => {
+  return async dispatch => {
+    try {
+      const res = await fetch(`http://localhost:3000/tasks/${taskId}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify(updatedInfo)
+      })
+      if(boardId) {
+        dispatch(getListsByBoardId(boardId))
+      }
+    }
+    catch(error) {
+      console.log('Update Task Position Error:', error)
     }
   }
 }

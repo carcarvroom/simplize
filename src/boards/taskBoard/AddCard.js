@@ -25,7 +25,7 @@ class AddCard extends Component {
       newTask: {
         ...this.state.newTask,
         list_id: this.props.listId,
-        title: `card-${this.props.nextCard+1}`,
+        title: `${this.props.nextCard+1}`,
         board_id: this.props.boardId,
         [e.target.name]: e.target.value
       }
