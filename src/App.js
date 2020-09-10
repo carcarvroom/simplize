@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom"
 import HomePage from './components/layouts/HomePage'
 import AdminLayout from './components/layouts/Admin'
 import AuthLayout from './components/layouts/Auth'
+import Dashboard from './components/Dashboard'
 
 class App extends Component {
   componentDidMount(){
@@ -19,7 +20,8 @@ class App extends Component {
       <BrowserRouter>
       { localStorage.token ?
         <Switch>
-          <Route path="/" component={AdminLayout} />
+          <Route path="/" render={() => <AdminLayout/>} />
+          <Route path="/dashboard" component={Dashboard} />
           <Redirect from="*" to="/dashboard" />
         </Switch>
       :

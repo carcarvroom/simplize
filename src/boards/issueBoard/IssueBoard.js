@@ -30,15 +30,15 @@ class IssueBoard extends React.Component {
     return (
       <>
         <Header />
-        <Container className="mt--7" fluid>
+        <Container className="mt--8" fluid>
+
+        <Button className="mt--5 float-right" color="secondary" size="sm" type="button" onClick={() => this.toggleAddTableModal('addTableOpen')}>
+          Create new board
+        </Button>
           {boards.map(board => {
             return <IssueTable key={board.id} board={board}/>
           })}
         </Container>
-
-        <Button className="mt-5" block color="secondary" size="sm" type="button" onClick={() => this.toggleAddTableModal('addTableOpen')}>
-          Create new board
-        </Button>
         <Modal 
         className="modal-dialog-centered"
         isOpen={addTableOpen}

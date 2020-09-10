@@ -33,14 +33,14 @@ class TaskBoard extends Component {
     return (
       <>
       <Header />
-      <Container className="mt--7 border-0" fluid>
-        {boards.map(board => {
-          return <TaskTable key={board.id} board={board}/>
-        })}
-      </Container>
-      <Button className="mt-5" block color="secondary" size="sm" type="button" onClick={() => this.toggleAddBoardForm('addBoardFormOpen')}>
+      <Container className="mt--8 border-0" fluid>
+      <Button className="mt--5 float-right" color="secondary" size="sm" type="button" onClick={() => this.toggleAddTableModal('addTableOpen')}>
           Create new board
         </Button>
+        {boards.map((board) => {
+          return <TaskTable key={board.id} board={board} />
+        })}
+      </Container>
         <Modal 
         className="modal-dialog-centered"
         isOpen={addBoardFormOpen}

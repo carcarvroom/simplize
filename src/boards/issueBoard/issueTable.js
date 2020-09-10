@@ -20,7 +20,7 @@ import {
 const IssueTable = ({board}) => {
   const [addIssueModalOpen, toggleAddIssueModal] = useState(false)
   return (
-    <Row className="mt-5">
+    <Row className="mt-4">
       <div className="col">
         <Card className="shadow">
           <CardHeader className="border-0">

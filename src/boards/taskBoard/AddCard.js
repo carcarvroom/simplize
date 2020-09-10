@@ -41,7 +41,8 @@ class AddCard extends Component {
 
   renderAddButton = () => {
     return (
-      <div onClick={() => this.toggleFormOpen("formOpen")}
+      <div 
+      onClick={() => this.toggleFormOpen("formOpen")}
         style={{
         opacity: 0.5, 
         color: "inherit", 

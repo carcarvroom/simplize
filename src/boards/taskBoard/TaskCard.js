@@ -32,8 +32,9 @@ const TaskCard = ({card, index, editTaskCard, deleteTask, boardId}) => {
       <Draggable draggableId={String(card.id)} index={index}>
         {provided => (
           <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-            <Card>
+            <Card className="mb-3">
               <CardBody
+                style={{backgroundColor: "lemonchiffon"}}
                 onClick={() => setEditTask(true)}
               >
                 {!editTask ?
@@ -44,10 +45,10 @@ const TaskCard = ({card, index, editTaskCard, deleteTask, boardId}) => {
                   :
                   <div>
                     <Card style = {{
+                    backgroundColor: "lemonchiffon",
                     overflow: 'visible',
                     minHeight: 80,
-                    minWidth: 272,
-                    padding: '6px 8x 2px'
+                    minWidth: 250,
                     }}>
                       <Textarea 
                       value = {cardDescription}
@@ -56,6 +57,7 @@ const TaskCard = ({card, index, editTaskCard, deleteTask, boardId}) => {
                       name="description"
                       onChange={e => handleInputChange(e)}
                       style={{
+                        backgroundColor: "lemonchiffon",
                         resize: 'none',
                         width: '100%',
                         overflow: 'hidden',
@@ -90,6 +92,7 @@ const TaskCard = ({card, index, editTaskCard, deleteTask, boardId}) => {
                 }
               </CardBody>
             </Card>
+            {provided.placeholder}
           </div>
         )}
       </Draggable>

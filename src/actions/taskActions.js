@@ -193,6 +193,45 @@ export const deleteTask = (taskId, boardId) => {
   }
 }
 
+export const editListName = (listId, updatedInfo, boardId) => {
+  return async dispatch => {
+    try {
+      const res = await fetch(`http://localhost:3000/lists/${listId}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify(updatedInfo)
+      })
+      const lsitUpdated = await res.json()
+      console.log('updated list', lsitUpdated)
+      dispatch(getListsByBoardId(boardId))
+    }
+    catch(error) {
+      console.log('Update List Name Error:', error)
+    }
+  }
+}
+
+export const deleteList = (listId, boardId) => {
+  return async dispatch => {
+    try {
+      await fetch(`http://localhost:3000/lists/${listId}`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+      })
+      dispatch(getListsByBoardId(boardId))
+    }
+    catch(error) {
+      console.log('Delete List Error:', error)
+    }
+  }
+}
+
 export const sort = (
   droppableIdStart,
   droppableIdEnd,

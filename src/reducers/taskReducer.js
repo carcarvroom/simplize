@@ -15,20 +15,6 @@ const initialState = {
   //         text: "test 2"
   //       }
   //     ]
-  //   },
-  //   {
-  //     title: 'In progress',
-  //     id: `list-${1}`,
-  //     cards: [
-  //       {
-  //         id: `card-${3}`,
-  //         text: "test 1"
-  //       },
-  //       {
-  //         id: `card-${4}`,
-  //         text: "test 2"
-  //       }
-  //     ]
   //   }
   // ]
 }

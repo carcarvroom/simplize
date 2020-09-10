@@ -4,7 +4,6 @@ import Login from "./components/Login"
 import Issue from "./boards/issueBoard/IssueBoard"
 import Task from "./boards/taskBoard/TaskBoard"
 import Idea from "./boards/ideaBoard/IdeaBoard"
-import Roadmap from "./boards/roadmapBoard/RoadmapBoard"
 
 const routes = [
   {
@@ -29,10 +28,10 @@ const routes = [
     layout: "/auth"
   },
   {
-    path: "/issueboard",
-    name: "Issues",
-    icon: "ni ni-tag text-red",
-    component: Issue,
+    path: "/ideaboard",
+    name: "Ideas",
+    icon: "ni ni-bulb-61 text-yellow",
+    component: Idea,
     layout: "/admin"
   },
   {
@@ -43,17 +42,10 @@ const routes = [
     layout: "/admin"
   },
   {
-    path: "/ideaboard",
-    name: "Ideas",
-    icon: "ni ni-bulb-61 text-yellow",
-    component: Idea,
-    layout: "/admin"
-  },
-  {
-    path: "/roadmap",
-    name: "Roadmap",
-    icon: "ni ni-calendar-grid-58 text-pink",
-    component: Roadmap,
+    path: "/issueboard",
+    name: "Issues",
+    icon: "ni ni-tag text-red",
+    component: Issue,
     layout: "/admin"
   }
 ]

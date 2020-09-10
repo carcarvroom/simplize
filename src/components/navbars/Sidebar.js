@@ -35,7 +35,6 @@ class Sidebar extends React.Component {
     this.activeRoute.bind(this);
   }
 
-  // verifies if routeName is the one active (in browser input)
   activeRoute(routeName) {
     return this.props.location.pathname.indexOf(routeName) > -1 ? "active" : "";
   }
@@ -51,7 +50,7 @@ class Sidebar extends React.Component {
       collapseOpen: false
     });
   };
-  // creates the links that appear in the left menu / Sidebar
+
   createLinks = routes => {
     return routes.map((component, index) => {
       if (component.layout === "/admin") {
@@ -122,21 +121,6 @@ class Sidebar extends React.Component {
           {/* User */}
           <Nav className="align-items-center d-md-none">
             <UncontrolledDropdown nav>
-              <DropdownToggle nav className="nav-link-icon">
-                <i className="ni ni-bell-55" />
-              </DropdownToggle>
-              <DropdownMenu
-                aria-labelledby="navbar-default_dropdown_1"
-                className="dropdown-menu-arrow"
-                right
-              >
-                <DropdownItem>Action</DropdownItem>
-                <DropdownItem>Another action</DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>Something else here</DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
-            <UncontrolledDropdown nav>
               <DropdownToggle nav>
                 <Media className="align-items-center">
                   <span className="avatar avatar-sm rounded-circle">
@@ -158,10 +142,6 @@ class Sidebar extends React.Component {
                 <DropdownItem to="/admin/profile" tag={Link}>
                   <i className="ni ni-settings-gear-65" />
                   <span>Settings</span>
-                </DropdownItem>
-                <DropdownItem to="/admin/profile" tag={Link}>
-                  <i className="ni ni-calendar-grid-58" />
-                  <span>Activity</span>
                 </DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem onClick={this.handleLogout}>
@@ -244,18 +224,11 @@ Sidebar.defaultProps = {
 };
 
 Sidebar.propTypes = {
-  // links that will be displayed inside the component
   routes: PropTypes.arrayOf(PropTypes.object),
   logo: PropTypes.shape({
-    // innerLink is for links that will direct the user within the app
-    // it will be rendered as <Link to="...">...</Link> tag
     innerLink: PropTypes.string,
-    // outterLink is for links that will direct the user outside the app
-    // it will be rendered as simple <a href="...">...</a> tag
     outterLink: PropTypes.string,
-    // the image src of the logo
     imgSrc: PropTypes.string.isRequired,
-    // the alt for the img
     imgAlt: PropTypes.string.isRequired
   })
 };
