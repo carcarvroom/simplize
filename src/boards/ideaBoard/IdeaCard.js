@@ -9,7 +9,7 @@ import {
   CardBody,
   Button
 } from "reactstrap"
-// import style from './note.module.css'
+import style from './note.module.css'
 
 const IdeaCard = ({idea, boardId, editIdeaCard, deleteIdea}) => {
   const [editIdeaOpen, toggleEditIdeaOpen] = useState(false)
@@ -31,7 +31,9 @@ const IdeaCard = ({idea, boardId, editIdeaCard, deleteIdea}) => {
   return (
     // <div className="note">
       // <Card className={style.note}>
-      <Card style={{
+      <Card 
+      className={style.note}
+      style={{
         height: "150px",
         width: "150px",
         backgroundColor: idea.status
