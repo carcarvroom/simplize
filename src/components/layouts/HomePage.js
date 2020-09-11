@@ -37,9 +37,9 @@ class Home extends React.Component {
               <div className="header-body text-center mb-7">
                 <Row className="justify-content-center">
                   <Col lg="5" md="6">
-                    <h1 className="text-white">Welcome!</h1>
+                    <h1 className="text-white">Welcome to Simplize!</h1>
                     <p className="text-lead text-light">
-                      Login or sign up to simplize your life!
+                      Simplize your life with our managing tools: idea boards, task boards, issue tracking and more!
                     </p>
                   </Col>
                 </Row>

@@ -22,26 +22,14 @@ class Dashboard extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      activeNav: 1,
-      // chartExample1Data: "data1"
+      activeNav: 1
     };
-    // if (window.Chart) {
-    //   parseOptions(Chart, chartOptions());
-    // }
   }
-  // toggleNavs = (e, index) => {
-  //   e.preventDefault();
-  //   this.setState({
-  //     activeNav: index,
-  //     chartExample1Data:
-  //       this.state.chartExample1Data === "data1" ? "data2" : "data1"
-  //   });
-  // };
+
   render() {
     return (
       <>
         <Header />
-        {/* Page content */}
         <Container className="mt--7" fluid>
           <Row>
             <Col className="mb-5 mb-xl-0" xl="8">
@@ -52,7 +40,7 @@ class Dashboard extends React.Component {
                       <h6 className="text-uppercase text-light ls-1 mb-1">
                         Overview
                       </h6>
-                      <h2 className="text-white mb-0">Sales value</h2>
+                      <h2 className="text-white mb-0">Overview</h2>
                     </div>
                     <div className="col">
                       <Nav className="justify-content-end" pills>
@@ -86,14 +74,7 @@ class Dashboard extends React.Component {
                   </Row>
                 </CardHeader>
                 <CardBody>
-                  {/* Chart */}
-                  {/* <div className="chart">
-                    <Line
-                      data={chartExample1[this.state.chartExample1Data]}
-                      options={chartExample1.options}
-                      getDatasetAtEvent={e => console.log(e)}
-                    />
-                  </div> */}
+
                 </CardBody>
               </Card>
             </Col>
@@ -105,18 +86,12 @@ class Dashboard extends React.Component {
                       <h6 className="text-uppercase text-muted ls-1 mb-1">
                         Performance
                       </h6>
-                      <h2 className="mb-0">Total orders</h2>
+                      <h3 className="mb-0">Recent Activity</h3>
                     </div>
                   </Row>
                 </CardHeader>
                 <CardBody>
-                  {/* Chart */}
-                  {/* <div className="chart">
-                    <Bar
-                      data={chartExample2.data}
-                      options={chartExample2.options}
-                    />
-                  </div> */}
+
                 </CardBody>
               </Card>
             </Col>

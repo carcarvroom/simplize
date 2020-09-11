@@ -48,7 +48,7 @@ class AddCard extends Component {
         color: "inherit", 
         backgroundColor: "inherit"}}>
         <i className="fas fa-plus" />
-        <span>Add another card</span>
+        <span>Add card</span>
       </div>
     )
   }

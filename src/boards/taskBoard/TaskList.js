@@ -40,12 +40,12 @@ const TaskList = ({boardId, list, index, editListName, deleteList}) => {
                   ref={provided.innerRef}
                   >
                     { !editList ?
-                      <h1 onClick={() => {
+                      <h3 onClick={() => {
                         setEditList(true)
                         setListName(list.name)
                       }}>
                         {list.name}
-                      </h1>
+                      </h3>
                     :
                       <div>
                         <Card style = {{

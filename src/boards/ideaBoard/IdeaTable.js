@@ -10,12 +10,13 @@ import {
   Col
 } from "reactstrap";
 
-const IdeaTable = ({board}) => {
+const IdeaTable = ({board, createIdea}) => {
 
   const handleAddIdeaCard = () => {
-    this.props.createIdea({
+    createIdea({
       description: "New note",
-      board_id: board.id
+      board_id: board.id,
+      title: `${board.tasks.length+1}`
     })
   }
 
@@ -40,7 +41,7 @@ const IdeaTable = ({board}) => {
             <i className="fas fa-plus" />
             </Button>
             {board.tasks.map(idea => {
-              return <IdeaCard idea={idea} />
+              return <IdeaCard idea={idea} boardId={board.id} />
             })}
           </CardBody>
         </Card>
