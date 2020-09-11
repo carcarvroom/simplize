@@ -96,14 +96,14 @@ const IssueCard = ({issue, deleteIssue, boardId}) => {
       isOpen={editIssueModalOpen}
       toggle={() => editIssueModalOpen ? toggleEditIssueModal(false) : toggleEditIssueModal(true)}
       >
-        <EditIssueModal issue={issue} editIssueModalOpen={editIssueModalOpen} toggleEditIssueModal={toggleEditIssueModal}/>
+        <EditIssueModal boardId={boardId} issue={issue} editIssueModalOpen={editIssueModalOpen} toggleEditIssueModal={toggleEditIssueModal}/>
       </Modal>
       <Modal
       className="modal-dialog-centered"
       isOpen={issueModalOpen}
       toggle={() => issueModalOpen ? toggleIssueModal(false) : toggleIssueModal(true)}
       >
-        <IssueModal issue={issue} issueModalOpen={issueModalOpen} toggleIssueModal={toggleIssueModal}/>
+        <IssueModal issue={issue} issueModalOpen={issueModalOpen} toggleIssueModal={toggleIssueModal} toggleEditIssueModal={toggleEditIssueModal}/>
       </Modal>
     </tr>
   )

@@ -10,7 +10,7 @@ import {
 
 class IssueModal extends React.Component {
   render() {
-    const {issueModalOpen, toggleIssueModal, issue} = this.props
+    const {issueModalOpen, toggleIssueModal, issue, toggleEditIssueModal} = this.props
     return (
       <> 
         <CardHeader className="bg-white border-0">
@@ -51,7 +51,7 @@ class IssueModal extends React.Component {
               >
                 Close
               </Button>
-              <Button color="primary" type="submit">
+              <Button color="primary" type="button" onClick={() => toggleEditIssueModal(true)}>
                 Edit Issue
               </Button>
             </div>

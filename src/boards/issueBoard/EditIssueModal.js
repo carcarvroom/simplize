@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { editIssue } from '../../actions'
 import {
   CardBody,
   CardHeader,
@@ -26,7 +28,8 @@ class EditIssueModal extends React.Component {
       editIssue: {
         ...this.state.editIssue,
         [e.target.name]: e.target.value,
-        priority: this.state.selectedPriority
+        priority: this.state.selectedPriority,
+        status: this.state.selectedStatus
       }
     })
   }
@@ -41,13 +44,22 @@ class EditIssueModal extends React.Component {
     })
   }
 
+  handleSelectedStatus = (e, option) => {
+    e.persist()
+    this.setState({
+      editIssue: {
+        ...this.state.editIssue,
+        status: option
+      }
+    })
+  }
+
   handleSubmit = e => {
     e.preventDefault()
     console.log(this.state.editIssue)
-    // this.props.createIssue(this.state.editIssue)
-    // this.setState({editIssue: {}})
-    // this.props.toggleEditEdit(false)
-    // console.log('after', this.state)
+    this.props.editIssue(this.props.issue.id, this.state.editIssue, this.props.boardId)
+    this.setState({editIssue: {}})
+    this.props.toggleEditIssueModal(false)
   }
 
   render() {
@@ -83,6 +95,7 @@ class EditIssueModal extends React.Component {
                       className="form-control-alternative"
                       id="input-title"
                       placeholder={issue.title}
+                      defaultValue={issue.title}
                       type="text"
                       name="title"
                       onChange={this.handleOnChange}
@@ -97,6 +110,7 @@ class EditIssueModal extends React.Component {
                 <Input
                   className="form-control-alternative"
                   placeholder={issue.description}
+                  defaultValue={issue.description}
                   rows="4"
                   type="textarea"
                   name="description"
@@ -156,13 +170,18 @@ class EditIssueModal extends React.Component {
                         {issue.status}
                       </DropdownToggle>
                       <DropdownMenu>
-                        <DropdownItem>
+                        <DropdownItem
+                          onClick={e => this.handleSelectedStatus(e, 'Pending')}>
                           <span>Pending</span>
                         </DropdownItem>
-                        <DropdownItem>
+                        <DropdownItem
+                          onClick={e => this.handleSelectedStatus(e, 'In Review')}
+                        >
                           <span>In Review</span>
                         </DropdownItem>
-                        <DropdownItem>
+                        <DropdownItem
+                          onClick={e => this.handleSelectedStatus(e, 'Resolved')}
+                        >
                           <span>Resolved</span>
                         </DropdownItem>
                       </DropdownMenu>
@@ -192,4 +211,4 @@ class EditIssueModal extends React.Component {
   }
 }
 
-export default (EditIssueModal)
+export default connect(null, {editIssue})(EditIssueModal)
