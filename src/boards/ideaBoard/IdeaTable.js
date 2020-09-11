@@ -15,6 +15,13 @@ const IdeaTable = ({board, createIdea, editIdeaboard, deleteIdeaboard }) => {
   const [editBoardOpen, toggleEditBoardOpen] = useState(false)
   const [boardName, setBoardName] = useState(board.name)
 
+
+  const randomColor = () => {
+    const colors = ["#ff7eb9", "#ff65a3", "#7afcff", "#feff9c", "#fff740"]
+    const random = Math.floor(Math.random() * colors.length)
+    return colors[random]
+  }
+
   const handleEditBoardSubmit = () => {
     editIdeaboard(board.id, {name: boardName})
   }
@@ -32,7 +39,8 @@ const IdeaTable = ({board, createIdea, editIdeaboard, deleteIdeaboard }) => {
       description: "New note",
       board_id: board.id,
       title: `${board.tasks.length+1}`,
-      user_id: parseInt(localStorage.getItem('userId'))
+      user_id: parseInt(localStorage.getItem('userId')),
+      status: randomColor()
     })
   }
 
