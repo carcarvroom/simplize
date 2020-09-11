@@ -561,6 +561,47 @@ class Profile extends React.Component {
                 <hr className="my-4" />
                 <h6 className="heading-small text-muted mb-4">About me</h6>
                 <div className="pl-lg-4">
+                  <Row>
+                    <Col lg="6">
+                      <FormGroup>
+                        <label
+                          className="form-control-label"
+                          htmlFor="input-age"
+                        >
+                          Age
+                        </label>
+                        <Input
+                          className="form-control-alternative"
+                          id="input-age"
+                          placeholder={user.age}
+                          defaultValue={user.age}
+                          type="text"
+                          name="age"
+                          onChange={this.handleOnChange}
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col md="12">
+                      <FormGroup>
+                        <label
+                          className="form-control-label"
+                          htmlFor="input-img"
+                        >
+                          Profile Image
+                        </label>
+                        <Input
+                          className="form-control-alternative"
+                          id="input-img"
+                          placeholder="Profile picture"
+                          name="profile_img"
+                          type="text"
+                          onChange={this.handleOnChange}
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
                   <FormGroup>
                     <label>About Me</label>
                     <Input

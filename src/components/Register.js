@@ -21,7 +21,8 @@ class Register extends React.Component {
     name: '',
     email: '',
     username: '',
-    password: ''
+    password: '',
+    profile_img: 'https://www.corpcommsmagazine.co.uk/images/default-user.png'
   }
 
   handleOnChange = e => {
