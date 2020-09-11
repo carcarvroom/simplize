@@ -33,7 +33,7 @@ class TaskBoard extends Component {
     return (
       <>
       <Header />
-      <Container className="mt--8 border-0" fluid>
+      <Container className="mt--7 border-0" fluid>
       <Button className="mt--5 float-right" color="secondary" size="sm" type="button" onClick={() => this.toggleAddBoardForm('addBoardFormOpen')}>
           Create new board
         </Button>

@@ -1,12 +1,19 @@
 const loadBoards = (payload) => ({type: "LOAD_ISSUE_BOARDS", payload})
 
+const priorityOrder = ['High', 'Medium', 'Low']
+
 export const getIssueBoards = userId => {
   return async dispatch => {
     try {
       const res = await fetch(`http://localhost:3000/my_boards/${userId}/issueboard`, {headers: {"Authorization": `Bearer ${localStorage.getItem("token")}`}})
       const issueBoards = await res.json()
-      // console.log('fetched issueboards', issueBoards)
-      dispatch(loadBoards(issueBoards))
+      const sortedByIssue = issueBoards.map(board => {
+        return {...board,
+        tasks: board.tasks.sort((a, b) => {
+          return priorityOrder.indexOf(a.priority) - priorityOrder.indexOf(b.priority)
+        })}
+      })
+      dispatch(loadBoards(sortedByIssue))
     }
     catch(error) {
       console.log('Issue Board Fetch Error:', error)
@@ -27,7 +34,6 @@ export const editIssueboard = (boardId, updatedInfo) => {
         body: JSON.stringify(updatedInfo)
       })
       const issueboardUpdated = await res.json()
-      console.log('updated issueboard', issueboardUpdated)
       dispatch(getIssueBoards(parseInt(localStorage.getItem('userId'))))
     }
     catch(error) {
@@ -69,12 +75,32 @@ export const createIssue = issue => {
       if(newIssue.error) {
           alert(newIssue.error)
       } else {
-        console.log('created new issue!', newIssue)
         dispatch(getIssueBoards(parseInt(localStorage.getItem('userId'))))
       }
     }
     catch(error) {
       console.log('Create Issue Error:', error)
+    }
+  }
+}
+
+export const editIssue = (issueId, updatedInfo, boardId) => {
+  return async dispatch => {
+    try {
+      const res = await fetch(`http://localhost:3000/tasks/${issueId}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify(updatedInfo)
+      })
+      const issueUpdated = await res.json()
+      dispatch(getIssueBoards(parseInt(localStorage.getItem('userId'))))
+    }
+    catch(error) {
+      console.log('Update Issue Error:', error)
     }
   }
 }
@@ -112,7 +138,6 @@ export const createIssueboard = issueboard => {
       if(newIssueboard.error) {
           alert(newIssueboard.error)
       } else {
-        console.log('created new issueboard!', newIssueboard)
         dispatch(getIssueBoards(parseInt(localStorage.getItem('userId'))))
       }
     }

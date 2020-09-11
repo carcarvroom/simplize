@@ -31,7 +31,7 @@ const IdeaCard = ({idea, boardId, editIdeaCard, deleteIdea}) => {
   return (
     // <div className="note">
       <Card className={style.note}>
-        <CardBody body className="text-center">
+        <CardBody className="text-center">
         {!editIdeaOpen ?
           <Typography onClick={() => {
             toggleEditIdeaOpen(true)

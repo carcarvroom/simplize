@@ -29,7 +29,7 @@ class IssueBoard extends React.Component {
     return (
       <>
         <Header />
-          <Container className="mt--8" fluid>
+          <Container className="mt--7" fluid>
             <Button className="mt--5 float-right" color="secondary" size="sm" type="button" onClick={() => this.toggleAddTableModal('addTableOpen')}>
               Create new board
             </Button>

@@ -94,7 +94,7 @@ const IdeaTable = ({board, createIdea, editIdeaboard, deleteIdeaboard }) => {
             <i className="fas fa-plus" />
             </Button>
             {board.tasks.map(idea => {
-              return <IdeaCard idea={idea} boardId={board.id} />
+              return <IdeaCard key={idea.id} idea={idea} boardId={board.id} />
             })}
           </CardBody>
         </Card>
