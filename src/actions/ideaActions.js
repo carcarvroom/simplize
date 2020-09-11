@@ -61,6 +61,29 @@ export const editIdeaCard = (cardId, updatedInfo) => {
   }
 }
 
+export const editIdeaPosition = (ideaId, updatedInfo, boardId=null) => {
+  return async dispatch => {
+    try {
+      const res = await fetch(`http://localhost:3000/tasks/${ideaId}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify(updatedInfo)
+      })
+      const ideaUpdated = await res.json()
+      if(boardId) {
+        dispatch(getIdeaBoards(parseInt(localStorage.getItem('userId'))))
+      }
+    }
+    catch(error) {
+      console.log('Update Task Card Error:', error)
+    }
+  }
+}
+
 export const deleteIdea = (taskId) => {
   return async dispatch => {
     try {

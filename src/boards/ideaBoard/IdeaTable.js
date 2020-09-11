@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { connect } from 'react-redux'
-import { createIdea, editIdeaboard, deleteIdeaboard } from '../../actions'
+import { createIdea, editIdeaboard, deleteIdeaboard, editIdeaPosition } from '../../actions'
 import IdeaCard from './IdeaCard'
 import Textarea from 'react-textarea-autosize'
 import {
@@ -18,7 +18,7 @@ import {
   Row
 } from "reactstrap";
 
-const IdeaTable = ({board, createIdea, editIdeaboard, deleteIdeaboard }) => {
+const IdeaTable = ({board, createIdea, editIdeaboard, deleteIdeaboard, editIdeaPosition }) => {
   const [editBoardOpen, toggleEditBoardOpen] = useState(false)
   const [boardName, setBoardName] = useState(board.name)
 
@@ -51,9 +51,16 @@ const IdeaTable = ({board, createIdea, editIdeaboard, deleteIdeaboard }) => {
     })
   }
 
-  const onChange = (sourceId, sourceIndex, targetIndex, targetId) => {
-    // const nextState = swap(items, sourceIndex, targetIndex);
-    // setItems(nextState);
+  const onChange = (sourceId, sourceIndex, targetIndex) => {
+    const card = board.tasks.splice(sourceIndex, 1)
+    board.tasks.splice(targetIndex, 0, ...card)
+    board.tasks.forEach((task, index) => {
+      if(index === board.tasks.length-1) {
+        editIdeaPosition(task.id, {title: `${index+1}`}, board.id)
+      } else {
+        editIdeaPosition(task.id, {title: `${index+1}`})
+      }
+    })
   }
 
   return (
@@ -122,7 +129,7 @@ const IdeaTable = ({board, createIdea, editIdeaboard, deleteIdeaboard }) => {
           <GridContextProvider onChange={onChange}>
             <div>
               <GridDropZone
-                id="items"
+                id="board"
                 boxesPerRow={4}
                 rowHeight={160}
                 style={{ height: "500px" }}
@@ -149,4 +156,4 @@ const IdeaTable = ({board, createIdea, editIdeaboard, deleteIdeaboard }) => {
   )
 }
 
-export default connect(null, {createIdea, editIdeaboard, deleteIdeaboard })(IdeaTable)
+export default connect(null, {createIdea, editIdeaboard, deleteIdeaboard, editIdeaPosition})(IdeaTable)
