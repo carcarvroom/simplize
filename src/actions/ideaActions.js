@@ -6,7 +6,24 @@ export const getIdeaBoards = userId => {
       const res = await fetch(`http://localhost:3000/my_boards/${userId}/ideaboard`, {headers: {"Authorization": `Bearer ${localStorage.getItem("token")}`}})
       const ideaBoards = await res.json()
       console.log('fetched ideaBoards', ideaBoards)
-      dispatch(loadBoards(ideaBoards))
+      const sortedIdeas = ideaBoards.map(board => {
+        return {...board,
+          tasks: board.tasks.sort((a, b) => {
+            return parseInt(a.title) - parseInt(b.title)
+          })
+        }
+      }).map(list => {
+          return {
+            ...list,
+            tasks: list.tasks.map(task => {
+              return {
+                ...task,
+                title: `card-${task.title}`
+              }
+            })
+          }
+      })
+      dispatch(loadBoards(sortedIdeas))
     }
     catch(error) {
       console.log('Idea Board Fetch Error:', error)

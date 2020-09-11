@@ -96,8 +96,16 @@ class Dashboard extends React.Component {
                   showWeekdayLabels={true}
                   startDate={this.state.activeNav === 1 ? new Date("2020-01-01") : this.shiftDate(today, -30)}
                   endDate={today}
-                  values={[
-                  ]}
+                  values={ parseInt(localStorage.getItem('userId')) === 1 ?
+                  [
+                    { date: '2020-09-01', count: 4 },
+                    { date: '2020-09-04', count: 20 },
+                    { date: '2020-09-11', count: 1 },
+                    { date: '2020-09-10', count: 3 },
+                    { date: '2020-09-09', count: 38 },
+                  ]:
+                  null
+                  }
                   classForValue={(value) => {
                     if (!value) {
                       return 'color-empty';
