@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux'
-import { loginUser } from '../actions'
+import { loginUser, getActivity } from '../actions'
 import { Link } from "react-router-dom";
 import {
   Button,
@@ -35,6 +35,7 @@ class Login extends React.Component {
   handleLogin = e => {
     e.preventDefault()
     this.props.loginUser(this.state)
+    this.props.getActivity()
   }
 
   render() {
@@ -137,4 +138,4 @@ class Login extends React.Component {
   }
 }
 
-export default connect(null, {loginUser})(Login)
+export default connect(null, {loginUser, getActivity})(Login)

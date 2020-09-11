@@ -79,7 +79,7 @@ export const deleteIdea = (taskId) => {
   }
 }
 
-export const createIssueboard = issueboard => {
+export const createIdeaboard = ideaboard => {
   return async dispatch => {
     try {
       const res = await fetch(`http://localhost:3000/boards`, {
@@ -89,18 +89,57 @@ export const createIssueboard = issueboard => {
             "Accept": "application/json",
             "Authorization": `Bearer ${localStorage.getItem("token")}`
         },
-        body: JSON.stringify(issueboard)
+        body: JSON.stringify(ideaboard)
       })
-      const newIssueboard = await res.json()
-      if(newIssueboard.error) {
-          alert(newIssueboard.error)
+      const newideaboard = await res.json()
+      if(newideaboard.error) {
+          alert(newideaboard.error)
       } else {
-        console.log('created new issueboard!', newIssueboard)
+        console.log('created new ideaboard!', newideaboard)
         dispatch(getIdeaBoards(parseInt(localStorage.getItem('userId'))))
       }
     }
     catch(error) {
-      console.log('Create Issueboard Error:', error)
+      console.log('Create Ideaboard Error:', error)
+    }
+  }
+}
+
+export const editIdeaboard = (boardId, updatedInfo) => {
+  return async dispatch => {
+    try {
+      const res = await fetch(`http://localhost:3000/boards/${boardId}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify(updatedInfo)
+      })
+      const ideaboardUpdated = await res.json()
+      console.log('updated ideaboard', ideaboardUpdated)
+      dispatch(getIdeaBoards(parseInt(localStorage.getItem('userId'))))
+    }
+    catch(error) {
+      console.log('Update Ideaboard Error:', error)
+    }
+  }
+}
+
+export const deleteIdeaboard = boardId => {
+  return async dispatch => {
+    try {
+      await fetch(`http://localhost:3000/boards/${boardId}`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+      })
+      dispatch(getIdeaBoards(parseInt(localStorage.getItem('userId'))))
+    }
+    catch(error) {
+      console.log('Delete Ideaboard Error:', error)
     }
   }
 }

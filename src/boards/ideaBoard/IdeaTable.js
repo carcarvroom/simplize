@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import { connect } from 'react-redux'
-import { createIdea } from '../../actions'
+import { createIdea, editIdeaboard, deleteIdeaboard } from '../../actions'
 import IdeaCard from './IdeaCard'
+import Textarea from 'react-textarea-autosize'
 import {
   Button,
   Card,
@@ -10,28 +11,80 @@ import {
   Col
 } from "reactstrap";
 
-const IdeaTable = ({board, createIdea}) => {
+const IdeaTable = ({board, createIdea, editIdeaboard, deleteIdeaboard }) => {
+  const [editBoardOpen, toggleEditBoardOpen] = useState(false)
+  const [boardName, setBoardName] = useState(board.name)
+
+  const handleEditBoardSubmit = () => {
+    editIdeaboard(board.id, {name: boardName})
+  }
+
+  const handleInputChange = e => {
+    setBoardName(e.target.value)
+  }
+
+  const handleDeleteBoard = () => {
+    deleteIdeaboard(board.id)
+  }
 
   const handleAddIdeaCard = () => {
     createIdea({
       description: "New note",
       board_id: board.id,
-      title: `${board.tasks.length+1}`
+      title: `${board.tasks.length+1}`,
+      user_id: parseInt(localStorage.getItem('userId'))
     })
   }
 
   return (
     <>
       <Col className="mb-5 mb-xl-0">
-        <Card style={{backgroundColor: "#9c6f3e"}}>
-          <CardHeader className="bg-transparent border-2">
-              <div>
-                <h6 className="text-uppercase text-light ls-1 mb-1">
-                  Ideaboard
-                </h6>
-                <h2 className="text-white mb-0">{board.name}</h2>
-              </div>
-          </CardHeader>
+        <Card className="mb-3" style={{backgroundColor: "#9c6f3e"}}>
+          { !editBoardOpen ?
+            <CardHeader className="bg-transparent border-2"
+              onClick={() => {
+              toggleEditBoardOpen(true)
+              setBoardName(board.name)
+              }}
+            >
+              <h6 className="text-uppercase text-light ls-1 mb-1">
+                Ideaboard
+              </h6>
+              <h2 className="text-white mb-0">{board.name}</h2>
+            </CardHeader>
+            :
+            <div>
+              <Textarea 
+              value={boardName}
+              autoFocus 
+              onBlur={() => toggleEditBoardOpen(false)}
+              name="name"
+              onChange={e => handleInputChange(e)}
+              style={{
+                resize: 'none',
+                width: '100%',
+                overflow: 'hidden',
+                outline: 'none',
+                border: 'none'
+              }}
+              />
+              <Button 
+              color="primary"
+              size="sm" type="button"
+              onMouseDown={() => handleEditBoardSubmit()}
+              variant='contained' >
+                Edit Board Name
+              </Button>
+              <Button
+                className="float-right"
+                color="danger"
+                onMouseDown={() => handleDeleteBoard()}
+                size="sm" type="button"
+              >
+                Delete Idea Board
+              </Button>
+            </div>
+          }
           <CardBody style={{height: "400px"}}>
             <Button
               className="float-right"
@@ -50,4 +103,4 @@ const IdeaTable = ({board, createIdea}) => {
   )
 }
 
-export default connect(null, {createIdea})(IdeaTable)
+export default connect(null, {createIdea, editIdeaboard, deleteIdeaboard })(IdeaTable)

@@ -19,7 +19,7 @@ import {
   UncontrolledTooltip
 } from "reactstrap"
 
-const IssueTable = ({board, editIssueboar, deleteIssueboard}) => {
+const IssueTable = ({board, editIssueboard, deleteIssueboard}) => {
   const [addIssueModalOpen, toggleAddIssueModal] = useState(false)
   const [editBoardOpen, toggleEditBoardOpen] = useState(false)
   const [boardName, setBoardName] = useState(board.name)
@@ -71,12 +71,6 @@ const IssueTable = ({board, editIssueboar, deleteIssueboard}) => {
                 onMouseDown={() => handleEditBoardSubmit()}
                 variant='contained' >
                   Edit Board Name
-                </Button>
-                <Button
-                  onClick={() => toggleEditBoardOpen(false)}
-                  size="sm" type="button"
-                >
-                  X
                 </Button>
                 <Button
                   className="float-right"

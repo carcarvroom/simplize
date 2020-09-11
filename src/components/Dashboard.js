@@ -23,6 +23,9 @@ import {
 import Header from "./headers/Header"
 
 class Dashboard extends React.Component {
+  componentDidMount() {
+    this.props.getActivity()
+  }
   state = {
       activeNav: 1
   }
@@ -57,7 +60,7 @@ class Dashboard extends React.Component {
                       <h6 className="text-uppercase text-light ls-1 mb-1">
                         Issues
                       </h6>
-                      <h3 className="text-white mb-0">Issues Resolved Activity</h3>
+                      <h3 className="text-white mb-0">Issues Resolved</h3>
                     </div>
                     <div className="col">
                       <Nav className="justify-content-end" pills>
@@ -94,10 +97,6 @@ class Dashboard extends React.Component {
                   startDate={this.state.activeNav === 1 ? new Date("2020-01-01") : this.shiftDate(today, -30)}
                   endDate={today}
                   values={[
-                    { date: '2020-06-01', count: 12 },
-                    { date: '2020-01-01', count: 1 },
-                    { date: '2020-01-03', count: 4 },
-                    { date: '2020-01-06', count: 2 },
                   ]}
                   classForValue={(value) => {
                     if (!value) {
@@ -131,11 +130,11 @@ class Dashboard extends React.Component {
                 <CardBody>
                   { activity ? 
                     activity.map(item => {
-                    return <div>{item.trackable_type} created at {item.created_at}</div>
+                    return <div><Card>{item.trackable_type} created at {item.created_at}</Card></div>
                     })
                   :
-                  null
-                }
+                    null
+                  }
                 </CardBody>
               </Card>
             </Col>
