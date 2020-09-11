@@ -34,11 +34,18 @@ const IssueCard = ({issue, deleteIssue, boardId}) => {
       </th>
       <td>
         <Badge color="" className="badge-dot">
-          <i className="bg-warning" />
+          {issue.priority === "High" ? <i className="bg-danger" /> : null}
+          {issue.priority === "Medium" ? <i className="bg-info" /> : null}
+          {issue.priority === "Low" ? <i className="bg-success" /> : null}
           {issue.priority}
         </Badge>
       </td>
-      <td>{issue.status}</td>
+      <td>
+        {issue.status === "Resolved" ? <i className="ni ni-check-bold text-green"/> : null }
+        {issue.status === "In Review" ? <i className="ni ni-user-run text-yellow"/> : null }
+        {issue.status === "Pending" ? <i className="ni ni-atom text-pink"/> : null }
+        {issue.status}
+      </td>
       <td>
         <div className="avatar-group">
           <a
@@ -61,7 +68,7 @@ const IssueCard = ({issue, deleteIssue, boardId}) => {
           </UncontrolledTooltip>
         </div>
       </td>
-      <td className="text-right">
+      <td>
         <UncontrolledDropdown>
           <DropdownToggle
             className="btn-icon-only text-light"
@@ -77,11 +84,6 @@ const IssueCard = ({issue, deleteIssue, boardId}) => {
               onClick={() => editIssueModalOpen ? toggleEditIssueModal(false) : toggleEditIssueModal(true)}
             >
               Edit
-            </DropdownItem>
-            <DropdownItem
-              onClick={e => e.preventDefault()}
-            >
-              Completed
             </DropdownItem>
             <DropdownItem
               onClick={() => handleDelete(issue.id)}
