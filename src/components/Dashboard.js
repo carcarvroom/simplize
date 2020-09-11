@@ -104,7 +104,7 @@ class Dashboard extends React.Component {
                     { date: '2020-09-10', count: 3 },
                     { date: '2020-09-09', count: 38 },
                   ]:
-                  null
+                  []
                   }
                   classForValue={(value) => {
                     if (!value) {
