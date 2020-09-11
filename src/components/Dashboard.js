@@ -1,6 +1,9 @@
 import React from "react";
+import { connect } from 'react-redux'
+import { getActivity } from '../actions'
+
 import CalendarHeatmap from 'react-calendar-heatmap';
-import 'react-calendar-heatmap/dist/styles.css';
+import './calendarStyle.css'
 import classnames from "classnames";
 import {
   Button,
@@ -20,14 +23,27 @@ import {
 import Header from "./headers/Header"
 
 class Dashboard extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
+  state = {
       activeNav: 1
-    };
+  }
+
+  toggleNavs = (e, index) => {
+    e.preventDefault();
+    this.setState({
+      activeNav: index,
+    });
+  };
+
+  shiftDate = (date, numDays) => {
+    const newDate = new Date(date);
+    newDate.setDate(newDate.getDate() + numDays)
+    return newDate
   }
 
   render() {
+    const today = new Date()
+    const {activity} = this.props
+    console.log(activity, 'here')
     return (
       <>
         <Header />
@@ -50,11 +66,10 @@ class Dashboard extends React.Component {
                             className={classnames("py-2 px-3", {
                               active: this.state.activeNav === 1
                             })}
-                            href="#pablo"
                             onClick={e => this.toggleNavs(e, 1)}
                           >
-                            <span className="d-none d-md-block">Month</span>
-                            <span className="d-md-none">M</span>
+                            <span className="d-none d-md-block">Year</span>
+                            <span className="d-md-none">Y</span>
                           </NavLink>
                         </NavItem>
                         <NavItem>
@@ -63,11 +78,10 @@ class Dashboard extends React.Component {
                               active: this.state.activeNav === 2
                             })}
                             data-toggle="tab"
-                            href="#pablo"
                             onClick={e => this.toggleNavs(e, 2)}
                           >
-                            <span className="d-none d-md-block">Week</span>
-                            <span className="d-md-none">W</span>
+                            <span className="d-none d-md-block">Month</span>
+                            <span className="d-md-none">M</span>
                           </NavLink>
                         </NavItem>
                       </Nav>
@@ -76,14 +90,28 @@ class Dashboard extends React.Component {
                 </CardHeader>
                 <CardBody>
                 <CalendarHeatmap
-                  startDate={new Date('2016-01-01')}
-                  endDate={new Date('2016-04-01')}
+                  showWeekdayLabels={true}
+                  startDate={this.state.activeNav === 1 ? new Date("2020-01-01") : this.shiftDate(today, -30)}
+                  endDate={today}
                   values={[
-                    { date: '2016-01-01', count: 12 },
-                    { date: '2016-01-22', count: 122 },
-                    { date: '2016-01-30', count: 38 },
-                    // ...and so on
+                    { date: '2020-06-01', count: 12 },
+                    { date: '2020-01-01', count: 1 },
+                    { date: '2020-01-03', count: 4 },
+                    { date: '2020-01-06', count: 2 },
                   ]}
+                  classForValue={(value) => {
+                    if (!value) {
+                      return 'color-empty';
+                    } else if(value.count >= 0 && value.count <= 3) {
+                      return `color-gitlab-1`
+                    } else if(value.count > 3 && value.count <= 6) {
+                      return `color-gitlab-2`
+                    } else if(value.count > 6 && value.count <= 9) {
+                      return `color-gitlab-3`
+                    } else if(value.count > 9) {
+                      return `color-gitlab-4`
+                    }
+                  }}
                 />
                 </CardBody>
               </Card>
@@ -101,196 +129,14 @@ class Dashboard extends React.Component {
                   </Row>
                 </CardHeader>
                 <CardBody>
-
+                  { activity ? 
+                    activity.map(item => {
+                    return <div>{item.trackable_type} created at {item.created_at}</div>
+                    })
+                  :
+                  null
+                }
                 </CardBody>
-              </Card>
-            </Col>
-          </Row>
-          <Row className="mt-5">
-            <Col className="mb-5 mb-xl-0" xl="8">
-              <Card className="shadow">
-                <CardHeader className="border-0">
-                  <Row className="align-items-center">
-                    <div className="col">
-                      <h3 className="mb-0">Page visits</h3>
-                    </div>
-                    <div className="col text-right">
-                      <Button
-                        color="primary"
-                        href="#pablo"
-                        onClick={e => e.preventDefault()}
-                        size="sm"
-                      >
-                        See all
-                      </Button>
-                    </div>
-                  </Row>
-                </CardHeader>
-                <Table className="align-items-center table-flush" responsive>
-                  <thead className="thead-light">
-                    <tr>
-                      <th scope="col">Page name</th>
-                      <th scope="col">Visitors</th>
-                      <th scope="col">Unique users</th>
-                      <th scope="col">Bounce rate</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">/argon/</th>
-                      <td>4,569</td>
-                      <td>340</td>
-                      <td>
-                        <i className="fas fa-arrow-up text-success mr-3" />{" "}
-                        46,53%
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">/argon/index.html</th>
-                      <td>3,985</td>
-                      <td>319</td>
-                      <td>
-                        <i className="fas fa-arrow-down text-warning mr-3" />{" "}
-                        46,53%
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">/argon/charts.html</th>
-                      <td>3,513</td>
-                      <td>294</td>
-                      <td>
-                        <i className="fas fa-arrow-down text-warning mr-3" />{" "}
-                        36,49%
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">/argon/tables.html</th>
-                      <td>2,050</td>
-                      <td>147</td>
-                      <td>
-                        <i className="fas fa-arrow-up text-success mr-3" />{" "}
-                        50,87%
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">/argon/profile.html</th>
-                      <td>1,795</td>
-                      <td>190</td>
-                      <td>
-                        <i className="fas fa-arrow-down text-danger mr-3" />{" "}
-                        46,53%
-                      </td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </Card>
-            </Col>
-            <Col xl="4">
-              <Card className="shadow">
-                <CardHeader className="border-0">
-                  <Row className="align-items-center">
-                    <div className="col">
-                      <h3 className="mb-0">Social traffic</h3>
-                    </div>
-                    <div className="col text-right">
-                      <Button
-                        color="primary"
-                        href="#pablo"
-                        onClick={e => e.preventDefault()}
-                        size="sm"
-                      >
-                        See all
-                      </Button>
-                    </div>
-                  </Row>
-                </CardHeader>
-                <Table className="align-items-center table-flush" responsive>
-                  <thead className="thead-light">
-                    <tr>
-                      <th scope="col">Referral</th>
-                      <th scope="col">Visitors</th>
-                      <th scope="col" />
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">Facebook</th>
-                      <td>1,480</td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                          <span className="mr-2">60%</span>
-                          <div>
-                            <Progress
-                              max="100"
-                              value="60"
-                              barClassName="bg-gradient-danger"
-                            />
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Facebook</th>
-                      <td>5,480</td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                          <span className="mr-2">70%</span>
-                          <div>
-                            <Progress
-                              max="100"
-                              value="70"
-                              barClassName="bg-gradient-success"
-                            />
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Google</th>
-                      <td>4,807</td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                          <span className="mr-2">80%</span>
-                          <div>
-                            <Progress max="100" value="80" />
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Instagram</th>
-                      <td>3,678</td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                          <span className="mr-2">75%</span>
-                          <div>
-                            <Progress
-                              max="100"
-                              value="75"
-                              barClassName="bg-gradient-info"
-                            />
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">twitter</th>
-                      <td>2,645</td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                          <span className="mr-2">30%</span>
-                          <div>
-                            <Progress
-                              max="100"
-                              value="30"
-                              barClassName="bg-gradient-warning"
-                            />
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </Table>
               </Card>
             </Col>
           </Row>
@@ -300,4 +146,8 @@ class Dashboard extends React.Component {
   }
 }
 
-export default Dashboard;
+const mapStateToProps = state => ({
+  activity: state.userReducer.activity
+})
+
+export default connect(mapStateToProps, {getActivity})(Dashboard)

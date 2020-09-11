@@ -1,4 +1,6 @@
 const setUser = (payload) => ({ type: "LOGIN", payload})
+const loadActivity = (payload) => ({ type: "LOAD_ACTIVITY", payload})
+
 
 export const logOutUser = () => ({type: "LOGOUT"})
 
@@ -119,6 +121,20 @@ export const deleteUser = id => {
     catch(error) {
       // add log file
       console.log('Delete User Error:', error)
+    }
+  }
+}
+
+export const getActivity = () => {
+  return async dispatch => {
+    try {
+      const res = await fetch(`http://localhost:3000/activities`)
+      const activity = await res.json()
+      console.log('fetched activity', activity)
+      dispatch(loadActivity(activity))
+    }
+    catch(error) {
+      console.log('Fetch Activity Error:', error)
     }
   }
 }

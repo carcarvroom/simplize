@@ -1,6 +1,7 @@
 const initialState = {
   loggedIn: false,
-  user: {}
+  user: {},
+  activity: []
 }
 
 const userReducer = (state = initialState, action) => {
@@ -17,6 +18,12 @@ const userReducer = (state = initialState, action) => {
         user: {},
         userBoards: []
       }
+    case "LOAD_ACTIVITY":
+      return {
+        ...state,
+        activity: [...action.payload]
+      }
+
     default: return state
   }
 }

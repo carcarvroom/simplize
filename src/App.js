@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import {autoLogin} from './actions'
+import {autoLogin, getActivity} from './actions'
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom"
 
 import HomePage from './components/layouts/HomePage'
@@ -12,6 +12,7 @@ class App extends Component {
   componentDidMount(){
     if(localStorage.token) {
       this.props.autoLogin()
+      this.props.getActivity()
     }
   }
 
@@ -42,4 +43,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {autoLogin})(App);
+export default connect(mapStateToProps, {autoLogin, getActivity})(App);
