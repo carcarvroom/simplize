@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { editIdeaCard, deleteIdea } from '../../actions'
 import Typography from "@material-ui/core/Typography";
 import Textarea from 'react-textarea-autosize'
-import { Draggable } from 'react-beautiful-dnd'
+
 import {
   Card,
   CardBody,

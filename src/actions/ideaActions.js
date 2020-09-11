@@ -53,7 +53,6 @@ export const editIdeaCard = (cardId, updatedInfo) => {
         body: JSON.stringify(updatedInfo)
       })
       const ideaUpdated = await res.json()
-      console.log('updated idea', ideaUpdated)
       dispatch(getIdeaBoards(parseInt(localStorage.getItem('userId'))))
     }
     catch(error) {
@@ -95,7 +94,6 @@ export const createIdeaboard = ideaboard => {
       if(newideaboard.error) {
           alert(newideaboard.error)
       } else {
-        console.log('created new ideaboard!', newideaboard)
         dispatch(getIdeaBoards(parseInt(localStorage.getItem('userId'))))
       }
     }
@@ -118,7 +116,6 @@ export const editIdeaboard = (boardId, updatedInfo) => {
         body: JSON.stringify(updatedInfo)
       })
       const ideaboardUpdated = await res.json()
-      console.log('updated ideaboard', ideaboardUpdated)
       dispatch(getIdeaBoards(parseInt(localStorage.getItem('userId'))))
     }
     catch(error) {

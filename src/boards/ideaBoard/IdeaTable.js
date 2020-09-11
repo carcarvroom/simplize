@@ -4,11 +4,18 @@ import { createIdea, editIdeaboard, deleteIdeaboard } from '../../actions'
 import IdeaCard from './IdeaCard'
 import Textarea from 'react-textarea-autosize'
 import {
+  GridContextProvider,
+  GridDropZone,
+  GridItem,
+  swap
+} from "react-grid-dnd";
+import {
   Button,
   Card,
   CardHeader,
   CardBody,
-  Col
+  Col,
+  Row
 } from "reactstrap";
 
 const IdeaTable = ({board, createIdea, editIdeaboard, deleteIdeaboard }) => {
@@ -30,7 +37,7 @@ const IdeaTable = ({board, createIdea, editIdeaboard, deleteIdeaboard }) => {
     setBoardName(e.target.value)
   }
 
-  const handleDeleteBoard = () => {
+  const handleDeleteBoard = () => {    
     deleteIdeaboard(board.id)
   }
 
@@ -42,6 +49,11 @@ const IdeaTable = ({board, createIdea, editIdeaboard, deleteIdeaboard }) => {
       user_id: parseInt(localStorage.getItem('userId')),
       status: randomColor()
     })
+  }
+
+  const onChange = (sourceId, sourceIndex, targetIndex, targetId) => {
+    // const nextState = swap(items, sourceIndex, targetIndex);
+    // setItems(nextState);
   }
 
   return (
@@ -63,12 +75,14 @@ const IdeaTable = ({board, createIdea, editIdeaboard, deleteIdeaboard }) => {
             :
             <div>
               <Textarea 
+              className="text-white mb-0"
               value={boardName}
               autoFocus 
               onBlur={() => toggleEditBoardOpen(false)}
               name="name"
               onChange={e => handleInputChange(e)}
               style={{
+                backgroundColor: "#9c6f3e",
                 resize: 'none',
                 width: '100%',
                 overflow: 'hidden',
@@ -93,17 +107,41 @@ const IdeaTable = ({board, createIdea, editIdeaboard, deleteIdeaboard }) => {
               </Button>
             </div>
           }
-          <CardBody style={{height: "400px"}}>
-            <Button
-              className="float-right"
-              onClick={() => handleAddIdeaCard()}
-              size="sm"
-            >
-            <i className="fas fa-plus" />
-            </Button>
-            {board.tasks.map(idea => {
-              return <IdeaCard key={idea.id} idea={idea} boardId={board.id} />
-            })}
+          <CardBody style={{height: "500px"}}>
+            <Row>
+              <Col>
+                <Button
+                  className="float-right"
+                  onClick={() => handleAddIdeaCard()}
+                  size="sm"
+                >
+                <i className="fas fa-plus" />
+                </Button>
+              </Col>
+            </Row>
+          <GridContextProvider onChange={onChange}>
+            <div>
+              <GridDropZone
+                id="items"
+                boxesPerRow={4}
+                rowHeight={160}
+                style={{ height: "500px" }}
+              >
+                {board.tasks.map(idea => {
+                  return <GridItem key={idea.id}>
+                    <div
+                      style={{
+                        width: "100%",
+                        height: "100%"
+                      }}
+                    >
+                      <IdeaCard key={idea.id} idea={idea} boardId={board.id} />
+                    </div>
+                  </GridItem>
+                })}
+                </GridDropZone>
+              </div>
+            </GridContextProvider>
           </CardBody>
         </Card>
       </Col>
