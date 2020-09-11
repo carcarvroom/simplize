@@ -13,7 +13,7 @@ import {
   Modal
 } from "reactstrap"
 
-const IssueCard = ({issue, deleteIssue, boardId}) => {
+const IssueCard = ({issue, deleteIssue, boardId, user}) => {
 
   const [editIssueModalOpen, toggleEditIssueModal] = useState(false)
   const [issueModalOpen, toggleIssueModal] = useState(false)
@@ -50,21 +50,20 @@ const IssueCard = ({issue, deleteIssue, boardId}) => {
         <div className="avatar-group">
           <a
             className="avatar avatar-sm"
-            href="#pablo"
             id="tooltip875258217"
             onClick={e => e.preventDefault()}
           >
             <img
               alt="..."
               className="rounded-circle"
-              src={require("../../assets/img/theme/team-1-800x800.jpg")}
+              src={user.profile_img}
             />
           </a>
           <UncontrolledTooltip
             delay={0}
             target="tooltip875258217"
           >
-            Ryan Tompson
+            {user.first_name} {user.last_name}
           </UncontrolledTooltip>
         </div>
       </td>
@@ -111,4 +110,8 @@ const IssueCard = ({issue, deleteIssue, boardId}) => {
   )
 }
 
-export default connect(null, {deleteIssue})(IssueCard)
+const mapStateToProps = state => ({
+  user: state.userReducer.user
+})
+
+export default connect(mapStateToProps, {deleteIssue})(IssueCard)

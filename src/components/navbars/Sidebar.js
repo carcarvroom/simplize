@@ -108,7 +108,6 @@ class Sidebar extends React.Component {
           >
             <span className="navbar-toggler-icon" />
           </button>
-          {/* Brand */}
           {logo ? (
             <NavbarBrand className="pt-0" {...navbarBrandProps}>
               <img
@@ -118,7 +117,6 @@ class Sidebar extends React.Component {
               />
             </NavbarBrand>
           ) : null}
-          {/* User */}
           <Nav className="align-items-center d-md-none">
             <UncontrolledDropdown nav>
               <DropdownToggle nav>
@@ -153,7 +151,6 @@ class Sidebar extends React.Component {
           </Nav>
           {/* Collapse */}
           <Collapse navbar isOpen={this.state.collapseOpen}>
-            {/* Collapse header */}
             <div className="navbar-collapse-header d-md-none">
               <Row>
                 {logo ? (
@@ -181,7 +178,6 @@ class Sidebar extends React.Component {
                 </Col>
               </Row>
             </div>
-            {/* Form */}
             <Form className="mt-4 mb-3 d-md-none">
               <InputGroup className="input-group-rounded input-group-merge">
                 <Input
@@ -197,20 +193,9 @@ class Sidebar extends React.Component {
                 </InputGroupAddon>
               </InputGroup>
             </Form>
-            {/* Navigation */}
             <Nav navbar>{this.createLinks(routes)}</Nav>
-            {/* Divider */}
             <hr className="my-3" />
-            {/* Heading */}
-            {/* <h6 className="navbar-heading text-muted">Documentation</h6> */}
-            {/* Navigation */}
             <Nav className="mb-md-3" navbar>
-              {/* <NavItem>
-                <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/overview?ref=adr-admin-sidebar">
-                  <i className="ni ni-spaceship" />
-                  Getting started
-                </NavLink>
-              </NavItem> */}
             </Nav>
           </Collapse>
         </Container>
