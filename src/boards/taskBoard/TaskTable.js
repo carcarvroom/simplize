@@ -138,12 +138,6 @@ class TaskTable extends Component {
                     Edit Board Name
                   </Button>
                   <Button
-                    onClick={() => this.toggleEditTableOpen("editTableOpen")}
-                    size="sm" type="button"
-                  >
-                    X
-                  </Button>
-                  <Button
                     className="float-right"
                     color="danger"
                     onMouseDown={this.handleDeleteTable}

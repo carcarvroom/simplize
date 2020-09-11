@@ -13,6 +13,7 @@
     "cross-fetch": "^3.0.5",
     "react": "^16.13.1",
     "react-beautiful-dnd": "^13.0.0",
+    "react-calendar-heatmap": "^1.8.1",
     "react-chartjs-2": "^2.10.0",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",

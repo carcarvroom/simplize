@@ -41,7 +41,8 @@ class Register extends React.Component {
       <>
         <Col lg="6" md="8">
           <Card className="bg-secondary shadow border-0">
-            <CardHeader className="bg-transparent pb-5">
+            {/* Signing up with third party: */}
+            {/* <CardHeader className="bg-transparent pb-5">
               <div className="text-muted text-center mt-2 mb-4">
                 <small>Sign up with</small>
               </div>
@@ -75,10 +76,10 @@ class Register extends React.Component {
                   <span className="btn-inner--text">Google</span>
                 </Button>
               </div>
-            </CardHeader>
+            </CardHeader> */}
             <CardBody className="px-lg-5 py-lg-5">
               <div className="text-center text-muted mb-4">
-                <small>Or sign up with email</small>
+                <small>Sign up with email</small>
               </div>
               <Form role="form" onSubmit={(e) => this.handleRegister(e)}>
                 <FormGroup>
@@ -131,12 +132,6 @@ class Register extends React.Component {
                     <Input placeholder="Password" type="password" name="password" onChange={this.handleOnChange}/>
                   </InputGroup>
                 </FormGroup>
-                <div className="text-muted font-italic">
-                  <small>
-                    password strength:{" "}
-                    <span className="text-success font-weight-700">strong</span>
-                  </small>
-                </div>
                 <div className="text-center">
                   <Button className="mt-4" color="primary" type="submit">
                     Create account

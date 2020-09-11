@@ -47,9 +47,7 @@ class Admin extends React.Component {
           }}
         />
         <div className="main-content" ref="mainContent">
-          <AdminNavbar
-            // {team ? null : null}
-          />
+          <AdminNavbar/>
           <Switch>
             {this.getRoutes(routes)}
             <Route path="/profile" component={Profile} />

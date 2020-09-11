@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from 'react-redux'
-
 import { Container, Row, Col } from "reactstrap";
 
 class UserHeader extends React.Component {
@@ -18,9 +17,7 @@ class UserHeader extends React.Component {
             backgroundPosition: "center top"
           }}
         >
-          {/* Mask */}
           <span className="mask bg-gradient-default opacity-8" />
-          {/* Header container */}
           <Container className="d-flex align-items-center" fluid>
             <Row>
               <Col lg="7" md="10">
@@ -28,13 +25,6 @@ class UserHeader extends React.Component {
                 <p className="text-white mt-0 mb-5">
                   {user.description}
                 </p>
-                {/* <Button
-                  color="info"
-                  href="#pablo"
-                  onClick={e => e.preventDefault()}
-                >
-                  Edit profile
-                </Button> */}
               </Col>
             </Row>
           </Container>
@@ -43,7 +33,6 @@ class UserHeader extends React.Component {
     );
   }
 }
-
 
 const mapStateToProps = state => ({
   user: state.userReducer.user

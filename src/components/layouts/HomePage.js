@@ -1,7 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom"
 import { Container, Row, Col } from "reactstrap"
-
 import AuthNavbar from "../navbars/AuthNavbar"
 import AuthFooter from "../footers/AuthFooter"
 
@@ -9,9 +8,11 @@ class Home extends React.Component {
   componentDidMount() {
     document.body.classList.add("bg-default");
   }
+  
   componentWillUnmount() {
     document.body.classList.remove("bg-default");
   }
+
   getRoutes = routes => {
     return routes.map((component, index) => {
       if (component.layout === "/auth") {
@@ -21,12 +22,13 @@ class Home extends React.Component {
             component={component.component}
             key={index}
           />
-        );
+        )
       } else {
-        return null;
+        return null
       }
-    });
-  };
+    })
+  }
+
   render() {
     return (
       <>
@@ -61,7 +63,6 @@ class Home extends React.Component {
               </svg>
             </div>
           </div>
-          {/* Page content */}
         </div>
         <AuthFooter />
       </>

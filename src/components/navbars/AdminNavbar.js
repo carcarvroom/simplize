@@ -21,9 +21,7 @@ import {
 } from "reactstrap";
 
 class AdminNavbar extends React.Component {
-
   handleLogout = () => {
-    console.log('just logged out!')
     this.props.logOutUser()
   }
 
@@ -41,7 +39,8 @@ class AdminNavbar extends React.Component {
               className="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
               to="/"
             >
-              Put teams here
+              hi
+              {/* {team ? team.name : null} */}
             </Link>
             <Form className="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
               <FormGroup className="mb-0">

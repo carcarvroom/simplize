@@ -1,5 +1,6 @@
 import React from "react";
-
+import CalendarHeatmap from 'react-calendar-heatmap';
+import 'react-calendar-heatmap/dist/styles.css';
 import classnames from "classnames";
 import {
   Button,
@@ -38,9 +39,9 @@ class Dashboard extends React.Component {
                   <Row className="align-items-center">
                     <div className="col">
                       <h6 className="text-uppercase text-light ls-1 mb-1">
-                        Overview
+                        Issues
                       </h6>
-                      <h2 className="text-white mb-0">Overview</h2>
+                      <h3 className="text-white mb-0">Issues Resolved Activity</h3>
                     </div>
                     <div className="col">
                       <Nav className="justify-content-end" pills>
@@ -74,7 +75,16 @@ class Dashboard extends React.Component {
                   </Row>
                 </CardHeader>
                 <CardBody>
-
+                <CalendarHeatmap
+                  startDate={new Date('2016-01-01')}
+                  endDate={new Date('2016-04-01')}
+                  values={[
+                    { date: '2016-01-01', count: 12 },
+                    { date: '2016-01-22', count: 122 },
+                    { date: '2016-01-30', count: 38 },
+                    // ...and so on
+                  ]}
+                />
                 </CardBody>
               </Card>
             </Col>
@@ -84,7 +94,7 @@ class Dashboard extends React.Component {
                   <Row className="align-items-center">
                     <div className="col">
                       <h6 className="text-uppercase text-muted ls-1 mb-1">
-                        Performance
+                        Overview
                       </h6>
                       <h3 className="mb-0">Recent Activity</h3>
                     </div>

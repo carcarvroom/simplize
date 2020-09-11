@@ -81,12 +81,6 @@ const TaskCard = ({card, index, editTaskCard, deleteTask, boardId}) => {
                       variant='contained' >
                         Delete
                       </Button>
-                      <Button
-                        onMouseDown={() => {setEditTask(false)}}
-                        size="sm" type="button"
-                      >
-                        X
-                      </Button>
                     </div>
                   </div>
                 }

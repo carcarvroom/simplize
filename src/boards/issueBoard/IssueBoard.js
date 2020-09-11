@@ -26,19 +26,17 @@ class IssueBoard extends React.Component {
   render() {
     const {boards} = this.props
     const {addTableOpen} = this.state
-    // console.log('issueboards', boards)
     return (
       <>
         <Header />
-        <Container className="mt--8" fluid>
-
-        <Button className="mt--5 float-right" color="secondary" size="sm" type="button" onClick={() => this.toggleAddTableModal('addTableOpen')}>
-          Create new board
-        </Button>
-          {boards.map(board => {
-            return <IssueTable key={board.id} board={board}/>
-          })}
-        </Container>
+          <Container className="mt--8" fluid>
+            <Button className="mt--5 float-right" color="secondary" size="sm" type="button" onClick={() => this.toggleAddTableModal('addTableOpen')}>
+              Create new board
+            </Button>
+            {boards.map(board => {
+              return <IssueTable key={board.id} board={board}/>
+            })}
+          </Container>
         <Modal 
         className="modal-dialog-centered"
         isOpen={addTableOpen}

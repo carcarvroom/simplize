@@ -66,8 +66,7 @@ class Profile extends React.Component {
     return (
       <>
         <UserHeader />
-        {/* Page content */}
-        <Container className="mt--7" fluid>
+        <Container className="mt--9" fluid>
           <Row>
             <Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
               <Card className="card-profile shadow">
@@ -110,18 +109,6 @@ class Profile extends React.Component {
                   <Row>
                     <div className="col">
                       <div className="card-profile-stats d-flex justify-content-center mt-md-5">
-                        {/* <div>
-                          <span className="heading">22</span>
-                          <span className="description">Teams</span>
-                        </div>
-                        <div>
-                          <span className="heading">10</span>
-                          <span className="description">Tasks</span>
-                        </div>
-                        <div>
-                          <span className="heading">89</span>
-                          <span className="description">Comments</span>
-                        </div> */}
                       </div>
                     </div>
                   </Row>
@@ -146,9 +133,6 @@ class Profile extends React.Component {
                     <p>
                       {user.description}
                     </p>
-                    <a href="#pablo" onClick={e => e.preventDefault()}>
-                      Show more
-                    </a>
                   </div>
                 </CardBody>
               </Card>
@@ -195,22 +179,6 @@ class Profile extends React.Component {
                             />
                           </FormGroup>
                         </Col>
-                        <Col lg="6">
-                          <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-email"
-                            >
-                              Email address
-                            </label>
-                            <Input
-                              className="form-control-alternative"
-                              id="input-email"
-                              placeholder={user.email}
-                              type="email"
-                            />
-                          </FormGroup>
-                        </Col>
                       </Row>
                       <Row>
                         <Col lg="6">
@@ -248,11 +216,28 @@ class Profile extends React.Component {
                       </Row>
                     </div>
                     <hr className="my-4" />
-                    {/* Address */}
                     <h6 className="heading-small text-muted mb-4">
                       Contact information
                     </h6>
                     <div className="pl-lg-4">
+                      <Row>
+                        <Col md="12">
+                          <FormGroup>
+                            <label
+                              className="form-control-label"
+                              htmlFor="input-email"
+                            >
+                              Email address
+                            </label>
+                            <Input
+                              className="form-control-alternative"
+                              id="input-email"
+                              placeholder={user.email}
+                              type="email"
+                            />
+                          </FormGroup>
+                        </Col>
+                      </Row>
                       <Row>
                         <Col md="12">
                           <FormGroup>
@@ -321,9 +306,9 @@ class Profile extends React.Component {
                           </FormGroup>
                         </Col>
                       </Row>
+
                     </div>
                     <hr className="my-4" />
-                    {/* Description */}
                     <h6 className="heading-small text-muted mb-4">About me</h6>
                     <div className="pl-lg-4">
                       <FormGroup>
@@ -342,6 +327,7 @@ class Profile extends React.Component {
             </Col>
           </Row>
           <Button
+          className="mt-4 float-center"
             color="info"
             onClick={() => {if (window.confirm('Are you sure you want to delete this account?')) this.props.deleteUser(user.id)}}
           >
@@ -416,7 +402,55 @@ class Profile extends React.Component {
                     </Col>
                   </Row>
                   <Row>
-                    <Col lg="6">
+                    <Col md="12">
+                      <FormGroup>
+                        <label
+                          className="form-control-label"
+                          htmlFor="input-position"
+                        >
+                          Position
+                        </label>
+                        <Input
+                          className="form-control-alternative"
+                          id="input-position"
+                          placeholder={user.position}
+                          defaultValue={user.position}
+                          type="text"
+                          name="position"
+                          onChange={this.handleOnChange}
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col md="12">
+                      <FormGroup>
+                        <label
+                          className="form-control-label"
+                          htmlFor="input-organization"
+                        >
+                          Organization
+                        </label>
+                        <Input
+                          className="form-control-alternative"
+                          id="input-organization"
+                          placeholder={user.organization}
+                          defaultValue={user.organization}
+                          type="text"
+                          name="organization"
+                          onChange={this.handleOnChange}
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                </div>
+                <hr className="my-4" />
+                <h6 className="heading-small text-muted mb-4">
+                  Contact information
+                </h6>
+                <div className="pl-lg-4">
+                  <Row>
+                    <Col md="12">
                       <FormGroup>
                         <label
                           className="form-control-label"
@@ -435,14 +469,6 @@ class Profile extends React.Component {
                         />
                       </FormGroup>
                     </Col>
-                  </Row>
-                </div>
-                <hr className="my-4" />
-                <h6 className="heading-small text-muted mb-4">
-                  Contact information
-                </h6>
-                <div className="pl-lg-4">
-                  <Row>
                     <Col md="12">
                       <FormGroup>
                         <label
@@ -513,9 +539,26 @@ class Profile extends React.Component {
                       </FormGroup>
                     </Col>
                   </Row>
+                  <Row>
+                    <Col md="12">
+                      <FormGroup>
+                        <label
+                          className="form-control-label"
+                          htmlFor="input-social"
+                        >
+                          Social
+                        </label>
+                        <Input
+                          className="form-control-alternative"
+                          id="input-social"
+                          placeholder="How would you like others to connect with you? (e.g. LinkedIn)"
+                          type="text"
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
                 </div>
                 <hr className="my-4" />
-                {/* Description */}
                 <h6 className="heading-small text-muted mb-4">About me</h6>
                 <div className="pl-lg-4">
                   <FormGroup>

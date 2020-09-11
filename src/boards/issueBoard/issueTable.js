@@ -37,7 +37,7 @@ const IssueTable = ({board, editIssueboar, deleteIssueboard}) => {
   }
 
   return (
-    <Row className="mt-4">
+    <Row className="mt-5">
       <div className="col">
         <Card className="shadow">
           { !editBoardOpen ?
