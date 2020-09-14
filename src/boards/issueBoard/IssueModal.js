@@ -1,5 +1,4 @@
-import React from 'react'
-
+import React from 'react'\
 import {
   CardBody,
   CardHeader,
@@ -61,4 +60,4 @@ class IssueModal extends React.Component {
   }
 }
 
-export default (IssueModal)
+export default IssueModal

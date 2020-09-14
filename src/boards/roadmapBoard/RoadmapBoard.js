@@ -32,26 +32,15 @@ class RoadmapBoard extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      activeNav: 1,
-      // chartExample1Data: "data1"
+      activeNav: 1
     };
-    // if (window.Chart) {
-    //   parseOptions(Chart, chartOptions());
-    // }
+
   }
-  // toggleNavs = (e, index) => {
-  //   e.preventDefault();
-  //   this.setState({
-  //     activeNav: index,
-  //     chartExample1Data:
-  //       this.state.chartExample1Data === "data1" ? "data2" : "data1"
-  //   });
-  // };
+
   render() {
     return (
       <>
         <Header />
-        {/* Page content */}
         <Container className="mt--7" fluid>
           <Row>
             <Col className="mb-5 mb-xl-0" xl="8">
@@ -119,15 +108,6 @@ class RoadmapBoard extends React.Component {
                     </div>
                   </Row>
                 </CardHeader>
-                <CardBody>
-                  {/* Chart */}
-                  {/* <div className="chart">
-                    <Bar
-                      data={chartExample2.data}
-                      options={chartExample2.options}
-                    />
-                  </div> */}
-                </CardBody>
               </Card>
             </Col>
           </Row>
