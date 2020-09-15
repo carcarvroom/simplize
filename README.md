@@ -105,22 +105,22 @@
 ## Demo
 
 ### Register/Login/Dashboard
-[Register/Login/Dashboard Demo](https://gfycat.com/giantmelodichedgehog)
+![Register/Login/Dashboard Demo](https://thumbs.gfycat.com/GiantMelodicHedgehog-size_restricted.gif)
 
 ### Teams/Edit Profile
-[Teams/Edit Profile Demo](https://gfycat.com/athleticscientificchanticleer)
+![Teams/Edit Profile Demo](https://thumbs.gfycat.com/AthleticScientificChanticleer-size_restricted.gif)
 
 ### Idea Board
-[Idea Board Demo](https://gfycat.com/rightincomparablekawala)
+![Idea Board Demo](https://thumbs.gfycat.com/RightIncomparableKawala-size_restricted.gif)
 
 ### Task Board
-[Task Board Demo](https://gfycat.com/difficultheftychupacabra)
+![Task Board Demo](https://thumbs.gfycat.com/DifficultHeftyChupacabra-size_restricted.gif)
 
 ### Issue Board
-[Issue Board Demo](https://gfycat.com/goodnaturedgrippingdanishswedishfarmdog)
+![Issue Board Demo](https://thumbs.gfycat.com/GoodnaturedGrippingDanishswedishfarmdog-size_restricted.gif)
 
 ### UI Scalability
-[UI Scalability Demo](https://gfycat.com/elatedsimplisticarachnid)
+![UI Scalability Demo](https://thumbs.gfycat.com/ElatedSimplisticArachnid-size_restricted.gif)
 
 ## Technologies Used
 
