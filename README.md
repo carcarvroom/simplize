@@ -104,7 +104,23 @@
 
 ## Demo
 
-  Coming soon!
+### Register/Login/Dashboard
+[Register/Login/Dashboard Demo](https://gfycat.com/giantmelodichedgehog)
+
+### Teams/Edit Profile
+[Teams/Edit Profile Demo](https://gfycat.com/athleticscientificchanticleer)
+
+### Idea Board
+[Idea Board Demo](https://gfycat.com/rightincomparablekawala)
+
+### Task Board
+[Task Board Demo](https://gfycat.com/difficultheftychupacabra)
+
+### Issue Board
+[Issue Board Demo](https://gfycat.com/goodnaturedgrippingdanishswedishfarmdog)
+
+### UI Scalability
+[UI Scalability Demo](https://gfycat.com/elatedsimplisticarachnid)
 
 ## Technologies Used
 
