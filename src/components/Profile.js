@@ -73,7 +73,7 @@ class Profile extends React.Component {
                 <Row className="justify-content-center">
                   <Col className="order-lg-2" lg="3">
                     <div className="card-profile-image">
-                      <a href="#pablo" onClick={e => e.preventDefault()}>
+                      <a href="#" onClick={e => e.preventDefault()}>
                         <img
                           alt="..."
                           className="rounded-circle"
@@ -88,7 +88,7 @@ class Profile extends React.Component {
                     <Button
                       className="mr-4"
                       color="info"
-                      href="#pablo"
+                      href="#"
                       onClick={e => e.preventDefault()}
                       size="sm"
                     >
@@ -97,7 +97,7 @@ class Profile extends React.Component {
                     <Button
                       className="float-right"
                       color="default"
-                      href="#pablo"
+                      href="#"
                       onClick={e => e.preventDefault()}
                       size="sm"
                     >

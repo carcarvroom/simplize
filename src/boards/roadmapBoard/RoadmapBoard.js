@@ -60,7 +60,7 @@
 //                             className={classnames("py-2 px-3", {
 //                               active: this.state.activeNav === 1
 //                             })}
-//                             href="#pablo"
+//                             href="#"
 //                             onClick={e => this.toggleNavs(e, 1)}
 //                           >
 //                             <span className="d-none d-md-block">Month</span>
@@ -73,7 +73,7 @@
 //                               active: this.state.activeNav === 2
 //                             })}
 //                             data-toggle="tab"
-//                             href="#pablo"
+//                             href="#"
 //                             onClick={e => this.toggleNavs(e, 2)}
 //                           >
 //                             <span className="d-none d-md-block">Week</span>
@@ -122,7 +122,7 @@
 //                     <div className="col text-right">
 //                       <Button
 //                         color="primary"
-//                         href="#pablo"
+//                         href="#"
 //                         onClick={e => e.preventDefault()}
 //                         size="sm"
 //                       >
@@ -200,7 +200,7 @@
 //                     <div className="col text-right">
 //                       <Button
 //                         color="primary"
-//                         href="#pablo"
+//                         href="#"
 //                         onClick={e => e.preventDefault()}
 //                         size="sm"
 //                       >

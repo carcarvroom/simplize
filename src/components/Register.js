@@ -52,7 +52,7 @@ class Register extends React.Component {
                 <Button
                   className="btn-neutral btn-icon mr-4"
                   color="default"
-                  href="#pablo"
+                  href="#"
                   onClick={e => e.preventDefault()}
                 >
                   <span className="btn-inner--icon">
@@ -66,7 +66,7 @@ class Register extends React.Component {
                 <Button
                   className="btn-neutral btn-icon"
                   color="default"
-                  href="#pablo"
+                  href="#"
                   onClick={e => e.preventDefault()}
                 >
                   <span className="btn-inner--icon">
