@@ -36,9 +36,9 @@ class AdminNavbar extends React.Component {
         <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
           <Container fluid>
             <Link
-              className="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
+              className="h4 mb-0 text-white d-none d-lg-inline-block"
               to="/"
-            >
+            >Hi {user.first_name}
             </Link>
             <Form className="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
               <FormGroup className="mb-0">

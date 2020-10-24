@@ -329,7 +329,7 @@ class Profile extends React.Component {
           <Button
           className="mt-4 float-center"
             color="info"
-            onClick={() => {if (window.confirm('Are you sure you want to delete this account?')) alert("Demo version delete account restricted")}
+            onClick={() => {if (window.confirm('Are you sure you want to delete this account?')) alert("Demo version delete account restricted")}}
           >
             Delete Account
           </Button>

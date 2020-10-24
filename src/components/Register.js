@@ -33,8 +33,9 @@ class Register extends React.Component {
   }  
 
   handleRegister= e => {
-    e.preventDefault()
-    this.props.signUpUser(this.state)
+    // e.preventDefault()
+    // this.props.signUpUser(this.state)
+    alert("Demo restriction")
   }
 
   render() {
@@ -43,7 +44,7 @@ class Register extends React.Component {
         <Col lg="6" md="8">
           <Card className="bg-secondary shadow border-0">
             {/* Signing up with third party: */}
-            {/* <CardHeader className="bg-transparent pb-5">
+            <CardHeader className="bg-transparent pb-5">
               <div className="text-muted text-center mt-2 mb-4">
                 <small>Sign up with</small>
               </div>
@@ -77,7 +78,7 @@ class Register extends React.Component {
                   <span className="btn-inner--text">Google</span>
                 </Button>
               </div>
-            </CardHeader> */}
+            </CardHeader>
             <CardBody className="px-lg-5 py-lg-5">
               <div className="text-center text-muted mb-4">
                 <small>Sign up with email</small>

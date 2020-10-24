@@ -44,7 +44,7 @@ class Login extends React.Component {
         <Col lg="5" md="7">
           <Card className="bg-secondary shadow border-0">
             {/* Logging in with third party: */}
-            {/* <CardHeader className="bg-transparent pb-5">
+            <CardHeader className="bg-transparent pb-5">
               <div className="text-muted text-center mt-2 mb-3">
                 <small>Sign in with</small>
               </div>
@@ -78,7 +78,7 @@ class Login extends React.Component {
                   <span className="btn-inner--text">Google</span>
                 </Button>
               </div>
-            </CardHeader> */}
+            </CardHeader>
             <CardBody className="px-lg-5 py-lg-5">
               <div className="text-center text-muted mb-4">
                 <small>Sign in below</small>
@@ -104,6 +104,11 @@ class Login extends React.Component {
                     <Input placeholder="Password" type="password" name='password' onChange={this.handleOnChange}/>
                   </InputGroup>
                 </FormGroup>
+                <div className="text-left text-muted mb-4">
+                    <large><b>Demo</b></large><br></br>
+                    <large> Login: leslie</large><br></br>
+                    <large> Password: 123</large>
+                </div>
                 <div className="text-center">
                   <Button className="my-4" color="primary" type="submit">
                     Sign in
